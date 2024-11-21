@@ -1,3 +1,7 @@
+.idea
 .vscode
-a.out
+.DS_Store
+*.out
+*.dSYM
 test.c
+obj
