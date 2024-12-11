@@ -4,8 +4,14 @@ CFLAGS = -Wall -Wextra -Werror -g
 NAME = minishell
 
 SOURCES = 	minishell.c	\
-			check_redirection_sign.c	\
-			ms_utils.c	
+			ms_utils.c	\
+			ms_init_cmd.c	\
+			ms_mem_free.c	\
+			ms_make_list.c	\
+			ms_parse_path.c	\
+			check_redirection_sign_2.c	\
+			check_redirection_sign_1.c
+
 OBJS = $(SOURCES:.c=.o)
 
 LIBFT = $(LIBFTDIR)/libft.a
@@ -17,7 +23,7 @@ $(NAME) : $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $^ -lreadline
 
 %.o : %.c
-	$(CC) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) -I$(LIBFTDIR) -o $@ -c $<
 
 $(LIBFT) :
 	@make -C $(LIBFTDIR) all

@@ -1,0 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ms_make_list.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/11 15:59:47 by gitkim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include "minishell.h"
+#include "libft.h"
+
+t_cmd	*make_new_node(char *cmd_str, char **path)
+{
+	char	**cmd_split;
+	t_cmd	*new_node;
+
+	cmd_split = append_cmd_options(cmd_str);
+	if (!cmd_split)
+	{
+		//error;
+	}
+	new_node = (t_cmd *)ft_calloc(sizeof(t_cmd), 1);
+	if (!new_node)
+	{
+		//error;
+	}
+	check_output_redirection_sign(cmd_str, new_node);
+	check_input_redirection_sign(cmd_str, new_node);
+	cmd_split[0] = parse_cmd_path(cmd_split[0], path);
+	if (!cmd_split)
+	{
+		//error
+	}
+	new_node->av = cmd_split;
+	cmd_str = NULL;
+	return (new_node);
+}
+
+void	list_add_back(t_cmd_list *list, t_cmd *node)
+{
+	if (!list->head)
+	{
+		list->head = node;
+		list->tail = node;
+	}
+	else
+	{
+		list->tail->next = node;
+		list->tail = node;
+	}
+	list->size++;
+}
+
+void	make_list(t_cmd_list *list, char **cmd_split)
+{
+	int		i;
+	char	**path;
+	t_cmd	*node;
+
+	path = get_path(getenv("PATH"));
+	i = 0;
+	ft_memset(list, 0, sizeof(t_cmd_list));
+	while (cmd_split[i])
+	{
+		node = make_new_node(cmd_split[i], path);
+		if (!node)
+		{
+			//error;
+		}
+		list_add_back(list, node);
+		i++;
+	}
+}

@@ -1,47 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_init_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 16:17:30 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/11 15:51:49 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/11 16:07:14 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include "minishell.h"
 #include "libft.h"
 
-void	execute_cmd(t_cmd_list *list)
+void	init_struct(char *str, t_cmd_list *list)
 {
-	if (!list)
-		return ;
-}
+	char	**temp;
 
-int	main(void)
-{
-	char		*str;
-	t_cmd_list	list;
-
-	while (1)
+	temp = ft_split(str, '|');
+	if (!temp)
 	{
-		str = readline("$ ");
-		if (str)
-		{
-			init_struct(str, &list);
-			free(str);
-			printf("%s", list.head->av[0]);
-			execute_cmd(&list);
-		}
-		else
-			break ;
-		add_history(str);
-		free(str);
+		//error
 	}
-	return (0);
+	make_list(list, temp);
+	free_split(temp);
 }

@@ -1,47 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_mem_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 16:17:30 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/11 15:52:34 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/11 15:53:15 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include "minishell.h"
-#include "libft.h"
 
-void	execute_cmd(t_cmd_list *list)
+void	free_split(char **split)
 {
-	if (!list)
-		return ;
-}
+	int	i;
 
-int	main(void)
-{
-	char		*str;
-	t_cmd_list	list;
-
-	while (1)
+	i = 0;
+	while (split[i])
 	{
-		str = readline("$ ");
-		if (str)
-		{
-			init_struct(str, &list);
-			free(str);
-			printf("%s", list.head->av[0]);
-			execute_cmd(&list);
-		}
-		else
-			break ;
-		add_history(str);
-		free(str);
+		free(split[i]);
+		i++;
 	}
-	return (0);
+	free(split);
 }

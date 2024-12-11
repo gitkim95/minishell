@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_redirection_sign.c                           :+:      :+:    :+:   */
+/*   check_redirection_sign_1.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:30:07 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 15:22:21 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/11 16:21:04 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "./libft/libft.h"
+#include "libft.h"
 
 char	*get_redirection_target(char *cmd_str)
 {
@@ -25,7 +25,7 @@ char	*get_redirection_target(char *cmd_str)
 		//error;
 	}
 	i = 0;
-	while (temp[i] != ' ' || temp[i])
+	while (temp[i] || temp[i] != ' ')
 		i++;
 	target = ft_substr(temp, 0, i);
 	if (!target)
@@ -43,7 +43,7 @@ int	is_double_input(char *cmd_str, t_cmd *node)
 	i = 0;
 	while (cmd_str[i])
 	{
-		if (ft_strncmp(cmd_str + i, "<<", 2))
+		if (!ft_strncmp(cmd_str + i, "<<", 2))
 		{
 			node->d_input = get_redirection_target(cmd_str + i + 2);
 			return (1);
@@ -60,9 +60,9 @@ int	is_single_input(char *cmd_str, t_cmd *node)
 	i = 0;
 	while (cmd_str[i])
 	{
-		if (ft_strncmp(cmd_str + i, "<", 1))
+		if (!ft_strncmp(cmd_str + i, "<", 1))
 		{
-			node->s_input = get_redirection_target(cmd_str + i + 2);
+			node->s_input = get_redirection_target(cmd_str + i + 1);
 			return (1);
 		}
 		i++;
@@ -72,12 +72,12 @@ int	is_single_input(char *cmd_str, t_cmd *node)
 
 int	is_double_output(char *cmd_str, t_cmd *node)
 {
-int	i;
+	int	i;
 
 	i = 0;
 	while (cmd_str[i])
 	{
-		if (ft_strncmp(cmd_str + i, ">>", 2))
+		if (!ft_strncmp(cmd_str + i, ">>", 2))
 		{
 			node->d_output = get_redirection_target(cmd_str + i + 2);
 			return (1);
@@ -91,12 +91,12 @@ int	is_single_output(char *cmd_str, t_cmd *node)
 {
 	int	i;
 
-	i = 0;	
+	i = 0;
 	while (cmd_str[i])
 	{
-		if (ft_strncmp(cmd_str + i, ">", 1))
+		if (!ft_strncmp(cmd_str + i, ">", 1))
 		{
-			node->s_output = get_redirection_target(cmd_str + i + 2);
+			node->s_output = get_redirection_target(cmd_str + i + 1);
 			return (1);
 		}
 		i++;

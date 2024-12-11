@@ -1,47 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   check_redirection_sign_2.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 16:17:30 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/11 16:00:51 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/11 16:07:26 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include "minishell.h"
 #include "libft.h"
 
-void	execute_cmd(t_cmd_list *list)
+void	check_input_redirection_sign(char *cmd_str, t_cmd *node)
 {
-	if (!list)
+	int	loc;
+
+	loc = is_double_input(cmd_str, node);
+	if (loc)
+		return ;
+	loc = is_single_input(cmd_str, node);
+	if (loc)
 		return ;
 }
 
-int	main(void)
+void	check_output_redirection_sign(char *cmd_str, t_cmd *node)
 {
-	char		*str;
-	t_cmd_list	list;
+	int	loc;
 
-	while (1)
-	{
-		str = readline("$ ");
-		if (str)
-		{
-			init_struct(str, &list);
-			free(str);
-			printf("%s", list.head->av[0]);
-			execute_cmd(&list);
-		}
-		else
-			break ;
-		add_history(str);
-		free(str);
-	}
-	return (0);
+	loc = is_double_output(cmd_str, node);
+	if (loc)
+		return ;
+	loc = is_single_output(cmd_str, node);
+	if (loc)
+		return ;
 }
