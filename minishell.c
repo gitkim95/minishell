@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 15:24:59 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/11 15:40:43 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 
 char	**get_path(char *path)
 {
-	char	**path;
+	char	**path_split;
 
-	path = ft_split(path, ":");\
+	path_split = ft_split(path, ':');
 	if (!path)
 	{
 		//error
 	}
-	return (path);
+	return (path_split);
 }
 
 static char	**append_cmd_options(char *arg)
@@ -148,7 +148,7 @@ void	make_list(t_cmd_list *list, char **cmd_split)
 	char	**path;
 	t_cmd	*node;
 
-	path = get_path;
+	path = get_path(getenv("PATH"));
 	i = 0;
 	ft_memset(list, 0, sizeof(t_cmd_list));
 	while (cmd_split[i])
@@ -180,7 +180,7 @@ void	init_struct(char *str, t_cmd_list *list)
 {
 	char **temp;
 
-	temp = ft_split(str, "|");
+	temp = ft_split(str, '|');
 	if (!temp)
 	{
 		//error
@@ -191,7 +191,8 @@ void	init_struct(char *str, t_cmd_list *list)
 
 void	execute_cmd(t_cmd_list *list)
 {
-
+	if (!list)
+		return ;
 }
 
 int	main()
