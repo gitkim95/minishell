@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/10 21:11:37 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/11 14:00:18 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,32 @@ char	*parse_cmd_path(char *cmd, char **path)
 	return (cmd);
 }
 
+void	val_redirection_sign(char *cmd_str, t_cmd *node)
+{
+	int	loc;
+	
+	loc = is_double_input(cmd_str, node);
+	if (loc != -1)
+	{
+		node->d_input = 
+	}
+	loc = is_single_input(cmd_str, node);
+	if (!node->d_input && loc != -1)
+	{
+		node->s_input = 
+	}
+	loc = is_double_output(cmd_str, node);
+	if (loc != -1)
+	{
+		node->d_output = 
+	}
+	loc = is_single_output(cmd_str, node);
+	if (loc != -1)
+	{
+		node->s_output =  
+	}
+}
+
 t_cmd	*make_new_node(char *cmd_str, char **path)
 {
 	char	**cmd_split;
@@ -85,15 +111,16 @@ t_cmd	*make_new_node(char *cmd_str, char **path)
 	{
 		//error;
 	}
-	cmd_split[0] = parse_cmd_path(cmd_split[0], path);
-	if (!cmd_split)
-	{
-		//error
-	}
 	new_node = (t_cmd *)ft_calloc(sizeof(t_cmd), 1);
 	if (!new_node)
 	{
 		//error;
+	}
+	val_redirection_sign(cmd_str, new_node);
+	cmd_split[0] = parse_cmd_path(cmd_split[0], path);
+	if (!cmd_split)
+	{
+		//error
 	}
 	new_node->av = cmd_split;
 	cmd_str = NULL;
@@ -114,6 +141,9 @@ void	list_add_back(t_cmd_list *list, t_cmd *node)
 	}
 	list->size++;
 }
+
+
+
 
 void	make_list(t_cmd_list *list, char **cmd_split)
 {
