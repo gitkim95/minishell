@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:47:51 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/11 21:39:55 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/11 21:45:46 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "minishell.h"
-#include "ms_execute.h"
+#ifndef MS_UTILS_H
+# define MS_UTILS_H
 
-int	main(void)
-{
-	t_cmd_list	list;
+//ms_utils.c
+char	*ft_strcat(char *dest, const char *src);
 
-	script_roop(&list);
-	//memory 해제
-	return (0);
-}
+//ms_mem_free.c
+void	free_split(char **split);
+
+#endif

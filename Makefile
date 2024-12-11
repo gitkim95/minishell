@@ -1,21 +1,35 @@
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror -g
+NAME		=	minishell
+INCLUDES	=	./includes
 
-NAME = minishell
+SOURCES		= 	minishell.c
+OBJS		=	$(SOURCES:.c=.o)	\
+				$(EXEC_OBJ)	\
+				$(PARSE_OBJ)	\
+				$(UTILS_OBJ)
 
-SOURCES = 	minishell.c	\
-			ms_utils.c	\
-			ms_init_cmd.c	\
-			ms_mem_free.c	\
-			ms_make_list.c	\
-			ms_parse_path.c	\
-			check_redirection_sign_2.c	\
-			check_redirection_sign_1.c
+UTILS_DIR	=	./utils
+UTILS_SRC	=	ms_utils.c	\
+				ms_mem_free.c
+UTILS_OBJ	=	$(addprefix $(UTILS_DIR)/, $(UTILS_SRC:.c=.o))
 
-OBJS = $(SOURCES:.c=.o)
+EXEC_DIR	=	./execute
+EXEC_SRC	=	ms_execute_cmd.c	\
+				ms_script_roop.c
+EXEC_OBJ	=	$(addprefix $(EXEC_DIR)/, $(EXEC_SRC:.c=.o))
 
-LIBFT = $(LIBFTDIR)/libft.a
-LIBFTDIR = ./libft
+PARSE_DIR	=	./parse
+PARSE_SRC	=	ms_init_cmd.c	\
+				ms_make_list.c	\
+				ms_parse_path.c	\
+				ms_open_fd.c	\
+				check_redirection_target.c	\
+				check_redirection_sign.c
+PARSE_OBJ	=	$(addprefix $(PARSE_DIR)/, $(PARSE_SRC:.c=.o))
+
+LIBFTDIR	=	./libft
+LIBFT		=	$(LIBFTDIR)/libft.a
 
 all : $(NAME)
 
@@ -23,7 +37,7 @@ $(NAME) : $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $^ -lreadline
 
 %.o : %.c
-	$(CC) $(CFLAGS) -I$(LIBFTDIR) -o $@ -c $<
+	$(CC) $(CFLAGS) -I$(LIBFTDIR) -I$(INCLUDES) -o $@ -c $<
 
 $(LIBFT) :
 	@make -C $(LIBFTDIR) all

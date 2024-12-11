@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_struct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:47:51 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/11 21:28:08 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/11 21:30:40 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "minishell.h"
-#include "ms_execute.h"
+#ifndef MS_STRUCT_H
+# define MS_STRUCT_H
 
-int	main(void)
+# include <errno.h>
+# define MS_BUFFER_SIZE 1024
+
+typedef struct s_cmd
 {
-	t_cmd_list	list;
+	char			**av;
+	int				s_in_fd;
+	int				s_out_fd;
+	char			*d_in_eof;
+	int				d_out_fd;
+	struct s_cmd	*next;
+}	t_cmd;
 
-	script_roop(&list);
-	//memory 해제
-	return (0);
-}
+typedef struct s_cmd_list
+{
+	t_cmd	*head;
+	t_cmd	*tail;
+	int		size;
+}	t_cmd_list;
+
+#endif

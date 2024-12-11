@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_mem_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:47:51 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/11 15:52:34 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/11 21:46:53 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "minishell.h"
-#include "ms_execute.h"
 
-int	main(void)
+void	free_split(char **split)
 {
-	t_cmd_list	list;
+	int	i;
 
-	script_roop(&list);
-	//memory 해제
-	return (0);
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }

@@ -6,12 +6,13 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:58:53 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 16:00:01 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/11 21:47:09 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "minishell.h"
+#include "ms_parse.h"
+#include "ms_utils.h"
 #include "libft.h"
 
 char	**get_path(char *path)
@@ -20,9 +21,7 @@ char	**get_path(char *path)
 
 	path_split = ft_split(path, ':');
 	if (!path)
-	{
-		//error
-	}
+		exit(ENOMEM);
 	return (path_split);
 }
 
@@ -34,7 +33,7 @@ char	**append_cmd_options(char *arg)
 
 	argv = ft_split(arg, ' ');
 	if (!argv)
-		return (NULL);
+		exit(ENOMEM);
 	if (!argv[1] || !ft_strchr(argv[1], '\''))
 		return (argv);
 	buf[0] = '\0';
@@ -47,6 +46,8 @@ char	**append_cmd_options(char *arg)
 		argv[idx++] = NULL;
 	}
 	argv[1] = ft_strtrim(buf, " \'\"");
+	if (!argv[1])
+		exit(ENOMEM);
 	return (argv);
 }
 
