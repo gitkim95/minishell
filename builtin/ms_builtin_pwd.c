@@ -1,46 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_builtin_cd.c                                    :+:      :+:    :+:   */
+/*   ms_builtin_pwd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 22:38:14 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/12 22:03:07 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <unistd.h>
 #include "ms_builtin.h"
 #include "ms_env.h"
 
-static void	update_pwd_env(char *path);
-
-int	ms_builtin_cd(char **argv)
+int	ms_builtin_pwd(char **argv)
 {
-	char	*path;
-	int		error;
-
-	if (argv[1])
-		path = argv[1];
-	else
-		path = get_env_value("HOME");
-	error = chdir(path);
-	if (error)
-		perror("minishell");
-	else
-		update_pwd_env(path);
-	return (error != 0);
-}
-
-static void	update_pwd_env(char *path)
-{
-	t_hash		*env_hash;
-	t_hash_node	*env_node;
-
-	env_hash = get_env_hash();
-	env_node = get_hash_node(env_hash, "PWD");
-	put_hash_value(env_hash, "OLDPWD", env_node->s_value);
-	put_hash_value(env_hash, "PWD", path);
+	printf("%s\n", get_env_value("PWD"));
+	return (0);
 }

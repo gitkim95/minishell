@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 20:53:29 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 20:50:02 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/12 21:53:24 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,23 @@ void	*put_hash_value(t_hash *hash, char *key, void *value)
 
 	node = get_hash_node(hash, key);
 	if (node)
+	{
+		if (hash->value_type == FT_HASH_INT)
+			node->i_value = *((int *)value);
+		else
+		{
+			free(node->s_value);
+			node->s_value = ft_strdup((const char *)value);
+		}
 		return (node);
+	}
 	node = get_new_node(hash, key, value);
 	table = &(hash->table[get_hash_code(key, ft_strlen(key))]);
-	if (!(table->head))
-	{
-		table->head = node;
-		table->tail = node;
-	}
-	else
-	{
+	if (table->head)
 		table->tail->next = node;
-		table->tail = node;
-	}
+	else
+		table->head = node;
+	table->tail = node;
 	++(hash->size);
 	return (node);
 }
