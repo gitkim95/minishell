@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_builtin.h                                       :+:      :+:    :+:   */
+/*   ms_builtin_cd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 14:22:09 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 19:58:50 by hwilkim          ###   ########.fr       */
+/*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
+/*   Updated: 2024/12/12 20:49:14 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_BUILTIN_H
-# define MS_BUILTIN_H
+#include <stdio.h>
+#include <unistd.h>
+#include "ms_builtin.h"
 
-# include <ft_hash.h>
-
-typedef enum e_builtin
+int	ms_builtin_cd(char **argv)
 {
-	MS_ECHO,
-	MS_CD,
-	MS_PWD,
-	MS_EXPORT,
-	MS_UNSET,
-	MS_ENV,
-	MS_EXIT
-}	t_builtin;
+	char	*path;
+	int		result;
 
-/* ms_builtin */
-t_hash	*get_builtin_hash(void);
-int		is_builtin(char *cmd);
-int		exec_builtin(char **argv);
-
-int		ms_builtin_echo(char **argv);
-int		ms_builtin_cd(char **argv);
-
-#endif
+	if (argv[1])
+		path = argv[1];
+	else
+		path = "/home/hwilkim";
+	result = chdir(path);
+	if (result)
+		perror("minishell");
+	return (result != 0);
+}

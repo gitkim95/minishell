@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:22:49 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 19:50:10 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/12 19:58:23 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	exec_builtin(char **argv)
 	if (builtin_type == MS_ECHO)
 		return (ms_builtin_echo(argv));
 	if (builtin_type == MS_CD)
-		return (0);
+		return (ms_builtin_cd(argv));
 	if (builtin_type == MS_PWD)
 		return (0);
 	if (builtin_type == MS_EXPORT)
