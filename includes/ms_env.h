@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_builtin_cd.c                                    :+:      :+:    :+:   */
+/*   ms_env.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 21:28:31 by hwilkim          ###   ########.fr       */
+/*   Created: 2024/12/12 21:03:13 by hwilkim           #+#    #+#             */
+/*   Updated: 2024/12/12 21:21:13 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include "ms_builtin.h"
-#include "ms_env.h"
+#ifndef MS_ENV_H
+# define MS_ENV_H
 
-int	ms_builtin_cd(char **argv)
-{
-	char	*path;
-	int		result;
+# include "ft_hash.h"
 
-	if (argv[1])
-		path = argv[1];
-	else
-		path = get_env_value("HOME");
-	result = chdir(path);
-	if (result)
-		perror("minishell");
-	return (result != 0);
-}
+t_hash	*get_env_hash(void);
+char	*get_env_value(char *key);
+void	set_env_state(char *envp[]);
+
+#endif
