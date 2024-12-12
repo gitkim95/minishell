@@ -6,54 +6,60 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:22:49 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 15:47:47 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/12 18:36:16 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "ft_hash.h"
 #include "ms_builtin.h"
 
-static int	ft_strcmp(char *s1, char *s2);
-
-char	**get_builtin_cmd(void)
+t_hash	*get_builtin_hash(void)
 {
-	static char	**builtin_cmd = {
-		"echo", "cd", "pwd", "export", "unset", "env", "exit", NULL
-	};
+	static t_hash	*builtin = NULL;
 
-	return (builtin_cmd);
+	if (!builtin)
+	{
+		builtin = make_hash(FT_HASH_INT);
+		put_hash_value(builtin, "echo", MS_ECHO);
+		put_hash_value(builtin, "cd", MS_CD);
+		put_hash_value(builtin, "pwd", MS_PWD);
+		put_hash_value(builtin, "export", MS_EXPORT);
+		put_hash_value(builtin, "unset", MS_UNSET);
+		put_hash_value(builtin, "env", MS_ENV);
+		put_hash_value(builtin, "exit", MS_EXIT);
+	}
+	return (builtin);
 }
 
 int	is_builtin(char *cmd)
 {
-	char	**builtin_cmd;
+	t_hash	*builtin_hash;
 
-	builtin_cmd = get_builtin_cmd();
-	while (*builtin_cmd)
-	{
-		if (ft_strcmp(*builtin_cmd, cmd) == 0)
-			return (1);
-		++builtin_cmd;
-	}
-	return (0);
+	builtin_hash = get_builtin_hash();
+	return (get_hash_node(builtin_hash, cmd) != NULL);
 }
 
-static int	ft_strcmp(char *s1, char *s2)
+int	exec_builtin(char *cmd, char **argv)
 {
-	unsigned char	c1;
-	unsigned char	c2;
-	unsigned int	idx;
+	t_hash		*builtin_hash;
+	t_builtin	builtin_type;
 
-	idx = 0;
-	while (s1[idx] != '\0' && s2[idx] != '\0')
-	{
-		c1 = s1[idx];
-		c2 = s2[idx];
-		if (c1 != c2)
-			return (c1 - c2);
-		++idx;
-	}
-	c1 = s1[idx];
-	c2 = s2[idx];
-	return (c1 - c2);
+	builtin_hash = get_builtin_hash();
+	builtin_type = get_hash_node(builtin_hash, argv[0])->i_value;
+	if (builtin_type == MS_ECHO)
+		return (0);
+	if (builtin_type == MS_CD)
+		return (0);
+	if (builtin_type == MS_PWD)
+		return (0);
+	if (builtin_type == MS_EXPORT)
+		return (0);
+	if (builtin_type == MS_UNSET)
+		return (0);
+	if (builtin_type == MS_ENV)
+		return (0);
+	if (builtin_type == MS_EXIT)
+		return (0);
+	exit(1);
 }
