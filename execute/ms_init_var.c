@@ -6,24 +6,45 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:16:59 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/12 15:49:28 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/12 18:07:48 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_execute.h"
 
-void	init_pipe_fd(t_cmd_list *list)
+void	alloc_pipe_fd(t_cmd_list *list)
 {
-	t_cmd	*node;
+	int	idx;
 
-	node = list->head;
-	while (node)
+	list->pipe_fd = (int **)malloc(sizeof(int *) * (list->size - 1));
+	if (!list->pipe_fd)
 	{
-		if (pipe(node->pipe_fd) == -1)
+		//error;
+	}
+	idx = 0;
+	while (idx < list->size - 1)
+	{
+		list->pipe_fd[idx] = (int *)malloc(sizeof(int) * 2);
+		if (!list->pipe_fd[idx])
 		{
 			//error;
 		}
-		node = node->next;
+		idx++;
+	}
+}
+
+void	init_pipe_fd(t_cmd_list *list)
+{
+	int	idx;
+
+	idx = 0;
+	while (idx < list->size - 1)
+	{
+		if (pipe(list->pipe_fd[idx]) == -1)
+		{
+			//error;
+		}
+		idx++;
 	}
 }
 
