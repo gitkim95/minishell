@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:28:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:30:40 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/12 15:32:40 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_cmd
 	int				s_out_fd;
 	char			*d_in_eof;
 	int				d_out_fd;
+	int				pipe_fd[2];
 	struct s_cmd	*next;
 }	t_cmd;
 
