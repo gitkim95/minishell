@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:47:51 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/11 21:39:35 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/11 21:40:41 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "minishell.h"
-#include "ms_execute.h"
+#include "ms_utils.h"
 
-int	main(void)
+char	*ft_strcat(char *dest, const char *src)
 {
-	t_cmd_list	list;
+	int	i;
+	int	j;
 
-	script_roop(&list);
-	//memory 해제
-	return (0);
+	i = 0;
+	while (dest[i])
+		i++;
+	j = 0;
+	while (src[j])
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
 }

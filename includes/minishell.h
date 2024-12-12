@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:47:51 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/10 16:12:29 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/11 21:46:26 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "minishell.h"
-#include "ms_execute.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int	main(void)
-{
-	t_cmd_list	list;
+# include "ms_struct.h"
 
-	script_roop(&list);
-	//memory 해제
-	return (0);
-}
+#endif

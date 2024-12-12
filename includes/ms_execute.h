@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_utils.c                                         :+:      :+:    :+:   */
+/*   ms_execute.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 15:33:02 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 15:37:31 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/11 21:37:08 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/11 21:46:18 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MS_EXECUTE_H
+# define MS_EXECUTE_H
 
-char	*ft_strcat(char *dest, const char *src)
-{
-	int	i;
-	int	j;
+# include "ms_struct.h"
 
-	i = 0;
-	while (dest[i])
-		i++;
-	j = 0;
-	while (src[i])
-	{
-		dest[i + j] = src[j];
-		j++;
-	}
-	dest[i + j] = '\0';
-	return (dest);
-}
+//ms_execute_cmd.c
+void	execute_cmd(t_cmd_list *list);
+
+//ms_script_roop.c
+void	script_roop(t_cmd_list *list);
+
+#endif
