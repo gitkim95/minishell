@@ -6,15 +6,15 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 20:53:29 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 18:04:23 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/12 20:50:02 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "ms_utils.h"
 #include "ft_hash.h"
 #include "libft.h"
 
-static int			ft_strcmp(char *s1, char *s2);
 static size_t		get_hash_code(char *key, int key_len);
 static t_hash_node	*get_new_node(t_hash *hash, char *key, void *value);
 
@@ -32,6 +32,11 @@ t_hash_node	*get_hash_node(t_hash *hash, char *key)
 		node = node->next;
 	}
 	return (NULL);
+}
+
+void	*put_hash_value_int(t_hash *hash, char *key, int value)
+{
+	return (put_hash_value(hash, key, &value));
 }
 
 void	*put_hash_value(t_hash *hash, char *key, void *value)
@@ -90,24 +95,4 @@ static t_hash_node	*get_new_node(t_hash *hash, char *key, void *value)
 	else
 		node->s_value = ft_strdup((const char *)value);
 	return (node);
-}
-
-static int	ft_strcmp(char *s1, char *s2)
-{
-	unsigned char	c1;
-	unsigned char	c2;
-	unsigned int	idx;
-
-	idx = 0;
-	while (s1[idx] != '\0' && s2[idx] != '\0')
-	{
-		c1 = s1[idx];
-		c2 = s2[idx];
-		if (c1 != c2)
-			return (c1 - c2);
-		++idx;
-	}
-	c1 = s1[idx];
-	c2 = s2[idx];
-	return (c1 - c2);
 }

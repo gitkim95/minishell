@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 16:31:01 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 17:54:57 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/12 19:31:15 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_hash
 /* utils */
 t_hash_node	*get_hash_node(t_hash *hash, char *key);
 void		*put_hash_value(t_hash *hash, char *key, void *value);
+void		*put_hash_value_int(t_hash *hash, char *key, int value);
 
 t_hash		*make_hash(t_value_type value_type);
 void		free_hash(t_hash *hash);

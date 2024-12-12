@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:22:09 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 18:38:01 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/12 19:21:20 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef enum e_builtin
 /* ms_builtin */
 t_hash	*get_builtin_hash(void);
 int		is_builtin(char *cmd);
-int		exec_builtin(char *cmd, char **argv);
+int		exec_builtin(char **argv);
+
+int		ms_builtin_echo(char **argv);
 
 #endif
