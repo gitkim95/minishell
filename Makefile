@@ -7,7 +7,24 @@ SOURCES		= 	minishell.c
 OBJS		=	$(SOURCES:.c=.o)	\
 				$(EXEC_OBJ)	\
 				$(PARSE_OBJ)	\
-				$(UTILS_OBJ)
+				$(UTILS_OBJ)	\
+				$(BUILTIN_OBJ)	\
+				$(ENV_OBJ)		\
+				$(HASH_OBJ)		\
+
+BUILTIN_DIR	=	./builtin
+BUILTIN_SRC =	ms_builtin_cd.c		ms_builtin_echo.c	ms_builtin_env.c	\
+				ms_builtin_export.c	ms_builtin_pwd.c	ms_builtin_unset.c	\
+				ms_builtin.c
+BUILTIN_OBJ	=	$(addprefix $(BUILTIN_DIR)/, $(BUILTIN_SRC:.c=.o))
+
+ENV_DIR 	=	./env
+ENV_SRC 	=	ms_env.c	ms_env_utils.c
+ENV_OBJ 	=	$(addprefix $(ENV_DIR)/, $(ENV_SRC:.c=.o))
+
+HASH_DIR	=	./hash
+HASH_SRC	=	ft_hash.c	ft_hash_utils.c
+HASH_OBJ	=	$(addprefix $(HASH_DIR)/, $(HASH_SRC:.c=.o))
 
 UTILS_DIR	=	./utils
 UTILS_SRC	=	ms_utils.c	\
