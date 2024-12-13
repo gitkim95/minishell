@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_script_roop.c                                   :+:      :+:    :+:   */
+/*   ms_script_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:55:02 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:57:13 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:59:40 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "ms_parse.h"
 #include "ms_execute.h"
 
-void	script_roop(t_cmd_list *list)
+void	script_loop(t_cmd_list *list)
 {
 	char	*input;
 
@@ -28,8 +28,7 @@ void	script_roop(t_cmd_list *list)
 		{
 			init_struct(input, list);
 			free(input);
-			printf("%s", list->head->av[0]);
-			execute_cmd(list);
+			// execute_cmd(list);
 		}
 		else
 			break ;

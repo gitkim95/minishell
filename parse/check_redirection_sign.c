@@ -6,12 +6,35 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:00:51 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:31:13 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 16:05:28 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_parse.h"
+#include "ms_utils.h"
 #include "libft.h"
+
+void	delete_redirection(char *cmd, int loc, int sign_size)
+{
+	int		idx;
+
+	idx = 0;
+	while (idx < sign_size)
+	{
+		cmd[loc + idx] = ' ';
+		idx++;
+	}
+	while (ft_isspace(cmd[idx + loc]))
+	{
+		cmd[idx + loc] = ' ';
+		idx++;
+	}
+	while (cmd[idx + loc] && !ft_isspace(cmd[idx + loc]))
+	{
+		cmd[idx + loc] = ' ';
+		idx++;
+	}
+}
 
 void	input_redirection_sign(char *cmd_str, t_cmd *node)
 {
@@ -24,14 +47,16 @@ void	input_redirection_sign(char *cmd_str, t_cmd *node)
 		target = get_redirection_target(cmd_str + loc + 2);
 		set_eof(target, node);
 		free(target);
+		delete_redirection(cmd_str, loc, 2);
 		return ;
 	}
 	loc = is_single_input(cmd_str);
 	if (loc)
 	{
-		target = get_redirection_target(cmd_str + loc + 2);
+		target = get_redirection_target(cmd_str + loc + 1);
 		set_single_input_fd(target, node);
 		free(target);
+		delete_redirection(cmd_str, loc, 1);
 		return ;
 	}
 }
@@ -47,14 +72,16 @@ void	output_redirection_sign(char *cmd_str, t_cmd *node)
 		target = get_redirection_target(cmd_str + loc + 2);
 		set_double_output_fd(target, node);
 		free(target);
+		delete_redirection(cmd_str, loc, 2);
 		return ;
 	}
 	loc = is_single_output(cmd_str);
 	if (loc)
 	{
-		target = get_redirection_target(cmd_str + loc + 2);
+		target = get_redirection_target(cmd_str + loc + 1);
 		set_single_output_fd(target, node);
 		free(target);
+		delete_redirection(cmd_str, loc, 1);
 		return ;
 	}
 }

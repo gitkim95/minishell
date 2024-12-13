@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_utils.c                                         :+:      :+:    :+:   */
+/*   ms_child_process.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 21:39:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 15:27:16 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/13 18:56:08 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_utils.h"
+#include <unistd.h>
+#include "ms_execute.h"
 
-char	*ft_strcat(char *dest, const char *src)
+void	child_process(t_cmd_list *list, pid_t *pid)
 {
-	int	i;
-	int	j;
+	t_cmd	*node;
+	int		idx;
 
-	i = 0;
-	while (dest[i])
-		i++;
-	j = 0;
-	while (src[j])
+	node = list->head;
+	idx = 0;
+	while (idx < list->size)
 	{
-		dest[i + j] = src[j];
-		j++;
+		pid[idx] = fork();
+		if (pid[idx] == -1)
+		{
+			//error;
+		}
+		else if (pid[idx] == 0)
+		{
+			free(pid);
+			pipe_connect_process(node, list, idx);
+		}
+		idx++;
+		node = node->next;
 	}
-	dest[i + j] = '\0';
-	return (dest);
-}
-
-int	ft_isspace(char c)
-{
-	return (c == ' ' || c == '\v' || c == '\t'\
-		|| c == '\n' || c == '\f' || c == '\r');
 }
