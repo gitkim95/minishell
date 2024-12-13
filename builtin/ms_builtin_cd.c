@@ -6,16 +6,17 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 22:38:14 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 16:09:41 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "ms_builtin.h"
 #include "ms_env.h"
 
-static void	update_pwd_env(char *path);
+static void	update_pwd_env(void);
 
 int	ms_builtin_cd(char **argv)
 {
@@ -25,22 +26,25 @@ int	ms_builtin_cd(char **argv)
 	if (argv[1])
 		path = argv[1];
 	else
-		path = get_env_value("HOME");
+		path = ms_get_env("HOME");
 	error = chdir(path);
 	if (error)
 		perror("minishell");
 	else
-		update_pwd_env(path);
+		update_pwd_env();
 	return (error != 0);
 }
 
-static void	update_pwd_env(char *path)
+static void	update_pwd_env(void)
 {
-	t_hash		*env_hash;
-	t_hash_node	*env_node;
+	char	*pwd;
+	char	*prev_pwd;
 
-	env_hash = get_env_hash();
-	env_node = get_hash_node(env_hash, "PWD");
-	put_hash_value(env_hash, "OLDPWD", env_node->s_value);
-	put_hash_value(env_hash, "PWD", path);
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		return ;
+	prev_pwd = ms_get_env("PWD");
+	ms_set_env("OLDPWD", prev_pwd);
+	ms_set_env("PWD", pwd);
+	free(pwd);
 }

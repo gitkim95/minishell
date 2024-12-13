@@ -1,51 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_env.c                                           :+:      :+:    :+:   */
+/*   ms_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 21:01:23 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 15:58:53 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 15:52:13 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "ms_env.h"
 #include "ft_hash.h"
-#include "libft.h"
 
-static t_hash	**get_env_state(void);
-
-t_hash	*get_env_hash(void)
+char	*ms_get_env(char *key)
 {
-	t_hash	**env_hash;
+	t_hash		*env_hash;
+	t_hash_node	*env;
 
-	env_hash = get_env_state();
-	return (*env_hash);
+	if (*key == '$')
+		++key;
+	env_hash = get_env_hash();
+	env = get_hash_node(env_hash, key);
+	if (env)
+		return (env->s_value);
+	return (NULL);
 }
 
-void	set_env_state(char *envp[])
+void	ms_set_env(char *key, char *value)
 {
-	t_hash	**env_hash;
-	char	*delimiter;
+	t_hash		*env_hash;
+	t_hash_node	*env;
 
-	env_hash = get_env_state();
-	if (*env_hash)
-		return ;
-	*env_hash = make_hash(FT_HASH_STR);
-	while (*envp)
-	{
-		delimiter = ft_strchr(*envp, '=');
-		*delimiter = '\0';
-		put_hash_value(*env_hash, *envp, delimiter + 1);
-		++envp;
-	}
+	if (*key == '$')
+		++key;
+	env_hash = get_env_hash();
+	put_hash_value(env_hash, key, value);
 }
 
-static t_hash	**get_env_state(void)
+void	ms_del_env(char *key)
 {
-	static t_hash	*env_hash = NULL;
+	t_hash		*env_hash;
+	t_hash_node	*env;
 
-	return (&env_hash);
+	if (*key == '$')
+		++key;
+	env_hash = get_env_hash();
+	remove_hash_value(env_hash, key);
 }

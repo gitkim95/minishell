@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 20:53:29 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 21:53:24 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 15:34:42 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #include "ft_hash.h"
 #include "libft.h"
 
-static size_t		get_hash_code(char *key, int key_len);
-static t_hash_node	*get_new_node(t_hash *hash, char *key, void *value);
+static t_hash_node	*make_new_node(t_hash *hash, char *key, void *value);
 
 t_hash_node	*get_hash_node(t_hash *hash, char *key)
 {
@@ -56,7 +55,7 @@ void	*put_hash_value(t_hash *hash, char *key, void *value)
 		}
 		return (node);
 	}
-	node = get_new_node(hash, key, value);
+	node = make_new_node(hash, key, value);
 	table = &(hash->table[get_hash_code(key, ft_strlen(key))]);
 	if (table->head)
 		table->tail->next = node;
@@ -67,26 +66,32 @@ void	*put_hash_value(t_hash *hash, char *key, void *value)
 	return (node);
 }
 
-static size_t	get_hash_code(char *key, int key_len)
+void	remove_hash_value(t_hash *hash, char *key)
 {
-	unsigned char	*uc_key;
-	size_t			idx;
-	size_t			pow;
-	size_t			hash_value;
+	size_t		hash_code;
+	t_hash_node	*node;
+	t_hash_node	*prev;
 
-	uc_key = (unsigned char *)key;
-	idx = 0;
-	pow = FT_HASH_TABLE;
-	hash_value = 0;
-	while (idx < key_len)
+	hash_code = get_hash_code(key, ft_strlen(key));
+	node = (hash->table)[hash_code].head;
+	if (!node)
+		return ;
+	prev = NULL;
+	while (node && ft_strcmp(key, node->key) != 0)
 	{
-		hash_value = (hash_value + uc_key[idx] * pow) % FT_HASH_TABLE;
-		++idx;
+		prev = node;
+		node = node->next;
 	}
-	return (hash_value);
+	if (!node)
+		return ;
+	if (!prev && node)
+		(hash->table)[hash_code].head = node->next;
+	else
+		prev->next = node->next;
+	free_hash_node(node);
 }
 
-static t_hash_node	*get_new_node(t_hash *hash, char *key, void *value)
+static t_hash_node	*make_new_node(t_hash *hash, char *key, void *value)
 {
 	t_hash_node	*node;
 

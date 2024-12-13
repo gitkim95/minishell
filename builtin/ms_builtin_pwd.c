@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/12 22:03:07 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 15:40:18 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 
 int	ms_builtin_pwd(char **argv)
 {
-	printf("%s\n", get_env_value("PWD"));
+	printf("%s\n", ms_get_env("PWD"));
 	return (0);
 }
