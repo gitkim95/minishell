@@ -6,13 +6,13 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 16:51:26 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:01:52 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ms_builtin.h"
 #include "ms_env.h"
+#include "libft.h"
 
 /* todo: multi arg input */
 int	ms_builtin_export(char **argv)

@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 16:31:01 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 15:48:42 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:05:39 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		*put_hash_value(t_hash *hash, char *key, void *value);
 void		*put_hash_value_int(t_hash *hash, char *key, int value);
 void		remove_hash_value(t_hash *hash, char *key);
 
-size_t		get_hash_code(char *key, int key_len);
+size_t		get_hash_code(char *key, size_t key_len);
 t_hash		*make_hash(t_value_type value_type);
 void		free_hash_node(t_hash_node *node);
 void		free_hash(t_hash *hash);

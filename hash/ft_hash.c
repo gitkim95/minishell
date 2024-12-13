@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 15:32:55 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 15:33:43 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:05:33 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_hash.h"
 #include "libft.h"
 
-size_t	get_hash_code(char *key, int key_len)
+size_t	get_hash_code(char *key, size_t key_len)
 {
 	unsigned char	*uc_key;
 	size_t			idx;

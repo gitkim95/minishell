@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 21:01:23 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 15:52:13 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:05:10 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char	*ms_get_env(char *key)
 void	ms_set_env(char *key, char *value)
 {
 	t_hash		*env_hash;
-	t_hash_node	*env;
 
 	if (*key == '$')
 		++key;
@@ -42,7 +41,6 @@ void	ms_set_env(char *key, char *value)
 void	ms_del_env(char *key)
 {
 	t_hash		*env_hash;
-	t_hash_node	*env;
 
 	if (*key == '$')
 		++key;

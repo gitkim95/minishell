@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:22:09 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 16:47:39 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 16:53:32 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int		ms_builtin_cd(char **argv);
 int		ms_builtin_pwd(char **argv);
 int		ms_builtin_export(char **argv);
 int		ms_builtin_unset(char **argv);
+int		ms_builtin_env(char **argv);
 
 #endif
