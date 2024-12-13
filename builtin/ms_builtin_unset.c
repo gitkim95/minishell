@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_builtin_export.c                                :+:      :+:    :+:   */
+/*   ms_builtin_unset.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 16:51:26 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 16:52:15 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,13 @@
 #include "ms_env.h"
 
 /* todo: multi arg input */
-int	ms_builtin_export(char **argv)
+int	ms_builtin_unset(char **argv)
 {
 	char	*env;
-	char	*delimiter;
 
 	env = argv[1];
 	if (!env)
 		return (0);
-	delimiter = ft_strchr(env, '=');
-	if (!delimiter)
-		return (0);
-	*delimiter = '\0';
-	ms_set_env(env, delimiter + 1);
+	ms_del_env(env);
 	return (0);
 }

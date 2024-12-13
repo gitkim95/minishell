@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:22:49 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 16:46:20 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 16:47:29 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	exec_builtin(char **argv)
 	if (builtin_type == MS_EXPORT)
 		return (ms_builtin_export(argv));
 	if (builtin_type == MS_UNSET)
-		return (0);
+		return (ms_builtin_unset(argv));
 	if (builtin_type == MS_ENV)
 		return (0);
 	if (builtin_type == MS_EXIT)
