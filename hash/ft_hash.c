@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 15:32:55 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 17:05:33 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:12:30 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	free_hash(t_hash *hash)
 	t_hash_node	*node;
 	t_hash_node	*temp;
 
+	if (!hash)
+		return ;
 	idx = 0;
 	while (idx < FT_HASH_TABLE)
 	{
