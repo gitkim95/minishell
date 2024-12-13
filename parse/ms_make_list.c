@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 15:51:37 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 16:37:10 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	list_add_back(t_cmd_list *list, t_cmd *node)
 	else
 	{
 		list->tail->next = node;
+		node->prev = list->tail;
 		list->tail = node;
 	}
 	list->size++;

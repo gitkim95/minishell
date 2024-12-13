@@ -6,48 +6,54 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/12 18:29:21 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 17:16:02 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ms_execute.h"
 
-void	set_io_last_cmd(t_cmd *node, t_cmd_list *list, int idx)
+void	set_input_descriptor(t_cmd *node, t_cmd_list *list, int idx)
 {
-	dup2(list->pipe_fd[idx - 1][0], STDIN_FILENO);
-	dup2(list->output_fd, STDOUT_FILENO);
-	close_child_last(list, idx);
+	if (node->s_in_fd != -1 || node->d_in_eof)
+	{
+		if (node->s_in_fd != -1)
+			dup2(node->s_in_fd, STDIN_FILENO);
+		else
+		{
+			//heredoc handling;
+		}
+	}
+	else if (node->prev)
+	{
+		if (node->prev->s_out_fd != -1 || node->d_out_fd != -1)
+			return ;
+		else
+			dup2(list->pipe_fd[idx - 1][0], STDIN_FILENO);
+	}
+	else
+		return ;
 }
-void	set_io_first_cmd(t_cmd *node, t_cmd_list *list, int idx)
+
+void	set_output_descriptor(t_cmd *node, t_cmd_list *list, int idx)
 {
-	if (node->s_out_fd == -1 && node->d_out_fd == -1)
+	if (node->s_out_fd != -1 || node->d_out_fd != -1)
+	{
+		if  (node->s_out_fd != -1)
+			dup2(node->s_out_fd, STDOUT_FILENO);
+		else
+			dup2(node->d_out_fd, STDOUT_FILENO);
+	}
+	else if (node->next)
 		dup2(list->pipe_fd[idx][1], STDOUT_FILENO);
-	close_child_first(list);
-}
-
-
-void	set_io_middle_cmd(t_cmd *node, t_cmd_list *list, int idx)
-{
-	dup2(list->pipe_fd[idx - 1][0], STDIN_FILENO);
-	dup2(list->pipe_fd[idx][1], STDOUT_FILENO);
-	close_child_middle(list, idx);
+	else
+		return ;
 }
 
 void	pipe_connect_process(t_cmd *node, t_cmd_list *list, int idx)
 {
-	if (node->s_in_fd != -1)
-		dup2(node->s_in_fd, STDIN_FILENO);
-	if (node->s_out_fd != -1)
-		dup2(node->s_out_fd, STDOUT_FILENO);
-	if (node->d_out_fd != -1)
-		dup2(node->d_out_fd, STDOUT_FILENO);
-	if (idx == list->size - 1)
-		set_io_last_cmd(node, list, idx);
-	else if (idx == 0)
-		set_io_first_cmd(node, list, idx);
-	else
-		set_io_middle_cmd(node, list, idx);
+	set_input_descriptor(node, list, idx);
+	set_output_descriptor(node, list, idx);
 }
 
 void	child_process(t_cmd_list *list, pid_t *pid)

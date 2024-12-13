@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:37:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/12 16:08:45 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 16:09:04 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	execute_cmd(t_cmd_list *list);
 void	child_process(t_cmd_list *list, pid_t *pid);
 
 //ms_init_var.c
+void	alloc_pipe_fd(t_cmd_list *list);
 void	init_pipe_fd(t_cmd_list *list);
 pid_t	*init_pid_arr(t_cmd_list *list);
 

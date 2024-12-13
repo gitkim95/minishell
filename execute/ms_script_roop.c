@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:55:02 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:57:13 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 16:08:17 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	script_roop(t_cmd_list *list)
 		{
 			init_struct(input, list);
 			free(input);
-			printf("%s", list->head->av[0]);
 			execute_cmd(list);
 		}
 		else
