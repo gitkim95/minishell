@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ms_make_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 16:37:10 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 20:21:01 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ms_parse.h"
+#include "ms_env.h"
 #include "libft.h"
 
 t_cmd	*make_new_node(char *cmd_str, char **path)
@@ -58,7 +59,7 @@ void	make_list(t_cmd_list *list, char **cmd_split)
 	char	**path;
 	t_cmd	*node;
 
-	path = get_path(getenv("PATH"));
+	path = get_path(ms_get_env("PATH"));
 	i = 0;
 	set_list_struct_zero(list);
 	while (cmd_split[i])

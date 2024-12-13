@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_utils.h                                         :+:      :+:    :+:   */
+/*   ms_env.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 21:39:55 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 20:07:38 by hwilkim          ###   ########.fr       */
+/*   Created: 2024/12/12 21:03:13 by hwilkim           #+#    #+#             */
+/*   Updated: 2024/12/13 15:36:37 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_UTILS_H
-# define MS_UTILS_H
+#ifndef MS_ENV_H
+# define MS_ENV_H
 
-# include "ms_struct.h"
+# include "ft_hash.h"
 
-//ms_utils.c
-char	*ft_strcat(char *dest, const char *src);
-int		ft_isspace(char c);
-int		ft_strcmp(char *s1, char *s2);
+/* ms_env */
+t_hash	*get_env_hash(void);
+void	set_env_state(char *envp[]);
 
-//ms_mem_free.c
-void	free_split(char **split);
-void	clear_ms_list(t_cmd_list *list);
-void	free_struct(t_cmd_list *list);
+/* ms_env_utils */
+char	*ms_get_env(char *key);
+void	ms_set_env(char *key, char *value);
+void	ms_del_env(char *key);
 
 #endif

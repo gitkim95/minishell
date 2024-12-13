@@ -1,38 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_builtin_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 20:21:27 by hwilkim          ###   ########.fr       */
+/*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
+/*   Updated: 2024/12/13 17:00:03 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "ms_execute.h"
-#include "ms_env.h"
 #include "ms_builtin.h"
+#include "ms_env.h"
+#include "libft.h"
 #include "ft_hash.h"
 
-static void	handle_hash_leak(void);
+static void	print_env(t_hash_node *env_node);
 
-//memory 해제
-int	main(int argc, char **argv, char **envp)
+int	ms_builtin_env(char **argv)
 {
-	t_cmd_list	list;
+	int			idx;
+	t_hash		*env_hash;
+	t_hash_node	*env_node;
 
-	(void) argc;
 	(void) argv;
-	set_env_state(envp);
-	script_loop(&list);
-	handle_hash_leak();
+	idx = 0;
+	env_hash = get_env_hash();
+	while (idx < FT_HASH_TABLE)
+	{
+		env_node = env_hash->table[idx].head;
+		print_env(env_node);
+		++idx;
+	}
 	return (0);
 }
 
-static void	handle_hash_leak(void)
+static void	print_env(t_hash_node *env_node)
 {
-	free_hash(get_env_hash());
-	free_hash(get_builtin_hash());
+	while (env_node)
+	{
+		ft_printf("%s=%s\n", env_node->key, env_node->s_value);
+		env_node = env_node->next;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:58:53 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:47:09 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 20:16:58 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**get_path(char *path)
 	char	**path_split;
 
 	path_split = ft_split(path, ':');
-	if (!path)
+	if (!path_split)
 		exit(ENOMEM);
 	return (path_split);
 }
