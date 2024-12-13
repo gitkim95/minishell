@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/12 16:08:48 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 15:52:08 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	execute_cmd(t_cmd_list *list)
 	pid = init_pid_arr(list);
 	init_pipe_fd(list);
 	child_process(list, pid);
-	parents_process();
+	// parents_process();
 	
 }

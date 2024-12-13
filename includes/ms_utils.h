@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:55 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 22:05:46 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 15:27:32 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 //ms_utils.c
 char	*ft_strcat(char *dest, const char *src);
+int		ft_isspace(char c);
 
 //ms_mem_free.c
 void	free_split(char **split);

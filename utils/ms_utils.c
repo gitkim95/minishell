@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:40:41 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 15:27:16 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,10 @@ char	*ft_strcat(char *dest, const char *src)
 	}
 	dest[i + j] = '\0';
 	return (dest);
+}
+
+int	ft_isspace(char c)
+{
+	return (c == ' ' || c == '\v' || c == '\t'\
+		|| c == '\n' || c == '\f' || c == '\r');
 }
