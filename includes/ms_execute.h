@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:37:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 16:09:04 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:59:44 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	alloc_pipe_fd(t_cmd_list *list);
 void	init_pipe_fd(t_cmd_list *list);
 pid_t	*init_pid_arr(t_cmd_list *list);
 
-//ms_script_roop.c
-void	script_roop(t_cmd_list *list);
+//ms_script_loop.c
+void	script_loop(t_cmd_list *list);
 
 #endif

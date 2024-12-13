@@ -15,8 +15,8 @@ UTILS_SRC	=	ms_utils.c	\
 UTILS_OBJ	=	$(addprefix $(UTILS_DIR)/, $(UTILS_SRC:.c=.o))
 
 EXEC_DIR	=	./execute
-EXEC_SRC	=	ms_execute_cmd.c	\
-				ms_script_roop.c
+EXEC_SRC	=	ms_script_loop.c
+# ms_execute_cmd.c	
 EXEC_OBJ	=	$(addprefix $(EXEC_DIR)/, $(EXEC_SRC:.c=.o))
 
 PARSE_DIR	=	./parse
