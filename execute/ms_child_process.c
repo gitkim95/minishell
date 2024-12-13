@@ -6,12 +6,15 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 18:56:08 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:41:19 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 #include "ms_execute.h"
+#include "ms_builtin.h"
+#include <stdio.h>
 
 void	child_process(t_cmd_list *list, pid_t *pid)
 {
@@ -22,17 +25,24 @@ void	child_process(t_cmd_list *list, pid_t *pid)
 	idx = 0;
 	while (idx < list->size)
 	{
-		pid[idx] = fork();
-		if (pid[idx] == -1)
+		if (is_builtin(node->av[0]))
+			execute_bulitin(node, list);
+		else
 		{
-			//error;
+			pid[idx] = fork();
+			if (pid[idx] == -1)
+			{
+				//error;
+			}
+			else if (pid[idx] == 0)
+			{
+				free(pid);
+				pipe_connect_process(node, list, idx);
+				printf("thisistest : %s\n", node->av[0]);
+				execute_cmd(node, list);
+			}
 		}
-		else if (pid[idx] == 0)
-		{
-			free(pid);
-			pipe_connect_process(node, list, idx);
-		}
-		idx++;
-		node = node->next;
+			idx++;
+			node = node->next;
 	}
 }

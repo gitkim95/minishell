@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ms_make_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 20:21:01 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/13 21:35:51 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ms_parse.h"
 #include "ms_env.h"
+#include "ms_builtin.h"
 #include "libft.h"
 
 t_cmd	*make_new_node(char *cmd_str, char **path)
@@ -29,7 +30,8 @@ t_cmd	*make_new_node(char *cmd_str, char **path)
 	cmd_split = append_cmd_options(cmd_str);
 	if (!cmd_split)
 		exit(ENOMEM);
-	cmd_split[0] = parse_cmd_path(cmd_split[0], path);
+	if (!is_builtin(cmd_split[0]))
+		cmd_split[0] = parse_cmd_path(cmd_split[0], path);
 	if (!cmd_split)
 		exit(ENOMEM);
 	new_node->av = cmd_split;

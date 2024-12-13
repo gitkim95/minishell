@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:55:14 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 18:57:57 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:09:48 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	set_output_descriptor(t_cmd *node, t_cmd_list *list, int idx)
 {
 	if (node->s_out_fd != -1 || node->d_out_fd != -1)
 	{
-		if  (node->s_out_fd != -1)
+		if (node->s_out_fd != -1)
 			dup2(node->s_out_fd, STDOUT_FILENO);
 		else
 			dup2(node->d_out_fd, STDOUT_FILENO);
@@ -54,4 +54,5 @@ void	pipe_connect_process(t_cmd *node, t_cmd_list *list, int idx)
 {
 	set_input_descriptor(node, list, idx);
 	set_output_descriptor(node, list, idx);
+	close_unnecessary_fd(node, list, idx);
 }

@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:55:02 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 19:59:40 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:12:35 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	script_loop(t_cmd_list *list)
 		{
 			init_struct(input, list);
 			free(input);
-			// execute_cmd(list);
+			execute_logic(list);
 		}
 		else
 			break ;

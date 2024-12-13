@@ -6,10 +6,12 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:16:59 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 16:08:39 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:27:18 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <unistd.h>
 #include "ms_execute.h"
 
 void	alloc_pipe_fd(t_cmd_list *list)

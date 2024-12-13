@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_execute_cmd.c                                   :+:      :+:    :+:   */
+/*   ms_execute_logic.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 21:13:38 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 21:41:46 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/13 21:12:54 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>//exit
 #include "ms_execute.h"
-#include "ms_builtin.h"
-#include "ms_env.h"
 
-void	execute_bulitin(t_cmd *node, t_cmd_list *list)
+void	execute_logic(t_cmd_list *list)
 {
-	if (!exec_builtin(node->av))
-		return ;
-	if (!node || !list)
-		return ;
-}
+	pid_t	*pid;
 
-void	execute_cmd(t_cmd *node, t_cmd_list *list)
-{
-	if (execve(node->av[0], node->av, NULL) == -1)
-	{
-		if (!list)
-			return ;
-	}
+	pid = init_pid_arr(list);
+	alloc_pipe_fd(list);
+	init_pipe_fd(list);
+	child_process(list, pid);
+	// parents_process();
 }
