@@ -6,16 +6,16 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:13:38 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/14 17:23:02 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/14 22:22:22 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "ms_execute.h"
 #include "ms_builtin.h"
 #include "ms_utils.h"
-// #include "ms_env.h"
 
 void	execute_bulitin(t_cmd *node, t_cmd_list *list, int flag)
 {
@@ -40,6 +40,7 @@ void	execute_cmd(t_cmd *node, t_cmd_list *list)
 {
 	if (execve(node->av[0], node->av, NULL) == -1)
 	{
+		perror(node->av[0]);
 		clear_ms_list(list);
 		exit(errno);
 	}

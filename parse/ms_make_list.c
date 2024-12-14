@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 21:35:51 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/14 21:34:51 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_cmd	*make_new_node(char *cmd_str, char **path)
 	set_cmd_struct_zero(new_node);
 	output_redirection_sign(cmd_str, new_node);
 	input_redirection_sign(cmd_str, new_node);
+	set_isspace_to_blank(cmd_str);
 	cmd_split = append_cmd_options(cmd_str);
 	if (!cmd_split)
 		exit(ENOMEM);

@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/14 17:20:15 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/14 22:29:45 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ void	child_process(t_cmd_list *list, pid_t *pid)
 		{
 			pid[idx] = fork();
 			if (pid[idx] == -1)
-			{
-				//error;
-			}
+				perror(NULL);
 			else if (pid[idx] == 0)
 			{
 				free(pid);
@@ -44,7 +42,7 @@ void	child_process(t_cmd_list *list, pid_t *pid)
 					execute_cmd(node, list);
 			}
 		}
-			idx++;
-			node = node->next;
+		idx++;
+		node = node->next;
 	}
 }

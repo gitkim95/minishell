@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:55:14 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 21:09:48 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/14 22:23:40 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ void	pipe_connect_process(t_cmd *node, t_cmd_list *list, int idx)
 {
 	set_input_descriptor(node, list, idx);
 	set_output_descriptor(node, list, idx);
-	close_unnecessary_fd(node, list, idx);
+	close_io_fd(list);
+	close_pipe_all(list);
 }
