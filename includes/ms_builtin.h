@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:22:09 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 16:53:32 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/14 14:25:52 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 
 # include <ft_hash.h>
 
+# define BUILTIN_HAS_OUTPUT	1
+# define BUILTIN_NO_OUTPUT	2
+
 typedef enum e_builtin
 {
 	MS_ECHO,
-	MS_CD,
 	MS_PWD,
+	MS_ENV,
+	MS_CD,
 	MS_EXPORT,
 	MS_UNSET,
-	MS_ENV,
 	MS_EXIT
 }	t_builtin;
 

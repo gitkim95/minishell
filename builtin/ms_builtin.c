@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:22:49 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 16:53:46 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/14 14:26:05 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,18 @@ t_hash	*get_builtin_hash(void)
 
 int	is_builtin(char *cmd)
 {
-	t_hash	*builtin_hash;
+	t_hash		*builtin_hash;
+	t_hash_node	*builtin_node;
+	t_builtin	builtin;
 
 	builtin_hash = get_builtin_hash();
-	return (get_hash_node(builtin_hash, cmd) != NULL);
+	builtin_node = get_hash_node(builtin_hash, cmd);
+	if (!builtin_node)
+		return (0);
+	builtin = builtin_node->i_value;
+	if (builtin < MS_CD)
+		return (BUILTIN_HAS_OUTPUT);
+	return (BUILTIN_NO_OUTPUT);
 }
 
 int	exec_builtin(char **argv)
@@ -60,6 +68,6 @@ int	exec_builtin(char **argv)
 	if (builtin_type == MS_ENV)
 		return (ms_builtin_env(argv));
 	if (builtin_type == MS_EXIT)
-		return (0);
-	exit(1);
+		return (MS_EXIT);
+	return (-1);
 }
