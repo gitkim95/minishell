@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:37:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/14 17:20:33 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 02:03:48 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@
 void	execute_logic(t_cmd_list *list);
 
 //ms_close_fd.c
-void	close_pipe_all(t_cmd_list *list);
+void	free_pipe(t_cmd_list *list);
+void	close_pipe_fd(t_cmd_list *list);
 void	close_io_fd(t_cmd_list *list);
-void	close_pipe_fd(t_cmd_list *list, int idx);
-void	close_unnecessary_fd(t_cmd *node, t_cmd_list *list, int idx);
+void	close_all_fd(t_cmd_list *list);
 
 //ms_execute_cmd.c
 void	execute_bulitin(t_cmd *node, t_cmd_list *list, int flag);
 void	execute_cmd(t_cmd *node, t_cmd_list *list);
 
 //ms_child_process.c
-void	child_process(t_cmd_list *list, pid_t *pid);
+void	process_loop(t_cmd_list *list, pid_t *pid);
 
 //ms_init_var.c
 void	alloc_pipe_fd(t_cmd_list *list);

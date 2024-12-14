@@ -6,27 +6,21 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:52:34 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/14 17:16:29 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 02:33:20 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "ft_hash.h"
 #include "ms_utils.h"
 #include "ms_execute.h"
+#include "ms_env.h"
+#include "ms_builtin.h"
 
-void	free_pipe(int **pipe, int size)
+void	handle_hash_leak(void)
 {
-	int	i;
-
-	if (!pipe)
-		return ;
-	i = 0;
-	while (i < size - 1)
-	{
-		free(pipe[i]);
-		i++;
-	}
-	free(pipe);
+	free_hash(get_env_hash());
+	free_hash(get_builtin_hash());
 }
 
 void	free_split(char **split)
@@ -49,8 +43,6 @@ void	clear_ms_list(t_cmd_list *list)
 	t_cmd	*node;
 	t_cmd	*temp;
 
-	close_io_fd(list);
-	close_pipe_all(list);
 	node = list->head;
 	while (node)
 	{
@@ -60,13 +52,14 @@ void	clear_ms_list(t_cmd_list *list)
 		free(temp->d_in_eof);
 		free(temp);
 	}
-	free_pipe(list->pipe_fd, list->size);
 	list->head = NULL;
 	list->tail = NULL;
 }
 
-void	free_struct(t_cmd_list *list)
+void	ms_terminator(t_cmd_list *list, int exit_code, int exit_flag)
 {
 	if (list->head)
 		clear_ms_list(list);
+	if (exit_flag)
+		exit(exit_code);
 }

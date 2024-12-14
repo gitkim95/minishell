@@ -6,13 +6,14 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:16:59 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 21:27:18 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 02:41:09 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "ms_execute.h"
+#include "libft.h"
 
 void	alloc_pipe_fd(t_cmd_list *list)
 {
@@ -31,6 +32,8 @@ void	alloc_pipe_fd(t_cmd_list *list)
 		{
 			//error;
 		}
+		list->pipe_fd[idx][0] = -1;
+		list->pipe_fd[idx][1] = -1;
 		idx++;
 	}
 }
@@ -59,5 +62,6 @@ pid_t	*init_pid_arr(t_cmd_list *list)
 	{
 		//error;
 	}
+	ft_memset(pid, -2, sizeof(pid_t) * list->size);
 	return (pid);
 }

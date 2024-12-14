@@ -35,7 +35,7 @@ EXEC_DIR	=	./execute
 EXEC_SRC	=	ms_execute_logic.c	\
 				ms_close_fd.c	\
 				ms_execute_cmd.c	\
-				ms_child_process.c	\
+				ms_processing.c	\
 				ms_init_var.c	\
 				ms_script_loop.c	\
 				ms_set_pipe.c

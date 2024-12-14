@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:13:38 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/14 22:22:22 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 02:45:02 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,9 @@ void	execute_bulitin(t_cmd *node, t_cmd_list *list, int flag)
 {
 	int	exit_code;
 
-	exit_code = exec_builtin(node->av);
-	if (exit_code == -1)
-	{
-		//error message
-	}
+	exec_builtin(node->av);
 	if (flag == BUILTIN_HAS_OUTPUT)
-	{
-		clear_ms_list(list);
-		if (exit_code > 0)
-			exit(0);
-		else
-			exit(exit_code);
-	}
+		ms_terminator(list, 0, 1);
 }
 
 void	execute_cmd(t_cmd *node, t_cmd_list *list)
@@ -41,7 +31,6 @@ void	execute_cmd(t_cmd *node, t_cmd_list *list)
 	if (execve(node->av[0], node->av, NULL) == -1)
 	{
 		perror(node->av[0]);
-		clear_ms_list(list);
-		exit(errno);
+		ms_terminator(list, errno, 1);
 	}
 }

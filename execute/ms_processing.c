@@ -1,22 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_child_process.c                                 :+:      :+:    :+:   */
+/*   ms_processing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/14 22:29:45 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 02:41:40 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <sys/wait.h>
 #include "ms_execute.h"
 #include "ms_builtin.h"
-#include <stdio.h>
 
-void	child_process(t_cmd_list *list, pid_t *pid)
+void	parent_process(t_cmd_list *list, pid_t *pid)
+{
+	int	idx;
+
+	close_all_fd(list);
+	idx = 0;
+	while (idx < list->size)
+	{
+		if (pid[idx] != -2)
+			waitpid(pid[idx], NULL, 0);
+		idx++;
+	}
+	free(pid);
+}
+
+void	child_process(t_cmd *node, t_cmd_list *list, int idx)
+{
+	pipe_connect_process(node, list, idx);
+	if (is_builtin(node->av[0]) == BUILTIN_HAS_OUTPUT)
+		execute_bulitin(node, list, BUILTIN_HAS_OUTPUT);
+	else
+		execute_cmd(node, list);
+}
+
+void	process_loop(t_cmd_list *list, pid_t *pid)
 {
 	t_cmd	*node;
 	int		idx;
@@ -35,14 +60,11 @@ void	child_process(t_cmd_list *list, pid_t *pid)
 			else if (pid[idx] == 0)
 			{
 				free(pid);
-				pipe_connect_process(node, list, idx);
-				if (is_builtin(node->av[0]) == BUILTIN_HAS_OUTPUT)
-					execute_bulitin(node, list, BUILTIN_HAS_OUTPUT);
-				else
-					execute_cmd(node, list);
+				child_process(node, list, idx);
 			}
 		}
 		idx++;
 		node = node->next;
 	}
+	parent_process(list, pid);
 }
