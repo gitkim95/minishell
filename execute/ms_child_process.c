@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 21:41:19 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/14 17:20:15 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	child_process(t_cmd_list *list, pid_t *pid)
 	idx = 0;
 	while (idx < list->size)
 	{
-		if (is_builtin(node->av[0]))
-			execute_bulitin(node, list);
+		if (is_builtin(node->av[0]) == BUILTIN_NO_OUTPUT)
+			execute_bulitin(node, list, BUILTIN_NO_OUTPUT);
 		else
 		{
 			pid[idx] = fork();
@@ -38,8 +38,10 @@ void	child_process(t_cmd_list *list, pid_t *pid)
 			{
 				free(pid);
 				pipe_connect_process(node, list, idx);
-				printf("thisistest : %s\n", node->av[0]);
-				execute_cmd(node, list);
+				if (is_builtin(node->av[0]) == BUILTIN_HAS_OUTPUT)
+					execute_bulitin(node, list, BUILTIN_HAS_OUTPUT);
+				else
+					execute_cmd(node, list);
 			}
 		}
 			idx++;

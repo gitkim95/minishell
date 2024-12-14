@@ -6,29 +6,41 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:13:38 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 21:41:46 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/14 17:23:02 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdlib.h>//exit
+#include <stdlib.h>
 #include "ms_execute.h"
 #include "ms_builtin.h"
-#include "ms_env.h"
+#include "ms_utils.h"
+// #include "ms_env.h"
 
-void	execute_bulitin(t_cmd *node, t_cmd_list *list)
+void	execute_bulitin(t_cmd *node, t_cmd_list *list, int flag)
 {
-	if (!exec_builtin(node->av))
-		return ;
-	if (!node || !list)
-		return ;
+	int	exit_code;
+
+	exit_code = exec_builtin(node->av);
+	if (exit_code == -1)
+	{
+		//error message
+	}
+	if (flag == BUILTIN_HAS_OUTPUT)
+	{
+		clear_ms_list(list);
+		if (exit_code > 0)
+			exit(0);
+		else
+			exit(exit_code);
+	}
 }
 
 void	execute_cmd(t_cmd *node, t_cmd_list *list)
 {
 	if (execve(node->av[0], node->av, NULL) == -1)
 	{
-		if (!list)
-			return ;
+		clear_ms_list(list);
+		exit(errno);
 	}
 }
