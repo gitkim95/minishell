@@ -5,21 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 19:57:43 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/13 21:13:38 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/15 16:02:32 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "ms_execute.h"
+#include "ms_builtin.h"
+#include "ms_utils.h"
 
-void	execute_cmd(t_cmd_list *list)
+void	execute_bulitin(t_cmd *node, t_cmd_list *list, int flag)
 {
-	pid_t	*pid;
+	exec_builtin(node->av);
+	if (flag == BUILTIN_HAS_OUTPUT)
+		ms_terminator(list, 0, 1);
+}
 
-	pid = init_pid_arr(list);
-	alloc_pipe_fd(list);
-	init_pipe_fd(list);
-	child_process(list, pid);
-	// parents_process();
-	
+void	execute_cmd(t_cmd *node, t_cmd_list *list)
+{
+	if (execve(node->av[0], node->av, NULL) == -1)
+	{
+		perror(node->av[0]);
+		ms_terminator(list, errno, 1);
+	}
 }

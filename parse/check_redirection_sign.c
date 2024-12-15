@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:00:51 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 16:05:28 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 17:44:53 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ms_utils.h"
 #include "libft.h"
 
-void	delete_redirection(char *cmd, int loc, int sign_size)
+static void	delete_redirection(char *cmd, int loc, int sign_size)
 {
 	int		idx;
 
@@ -42,7 +42,7 @@ void	input_redirection_sign(char *cmd_str, t_cmd *node)
 	char	*target;
 
 	loc = is_double_input(cmd_str);
-	if (loc)
+	if (loc >= 0)
 	{
 		target = get_redirection_target(cmd_str + loc + 2);
 		set_eof(target, node);
@@ -51,7 +51,7 @@ void	input_redirection_sign(char *cmd_str, t_cmd *node)
 		return ;
 	}
 	loc = is_single_input(cmd_str);
-	if (loc)
+	if (loc >= 0)
 	{
 		target = get_redirection_target(cmd_str + loc + 1);
 		set_single_input_fd(target, node);
@@ -67,7 +67,7 @@ void	output_redirection_sign(char *cmd_str, t_cmd *node)
 	char	*target;
 
 	loc = is_double_output(cmd_str);
-	if (loc)
+	if (loc >= 0)
 	{
 		target = get_redirection_target(cmd_str + loc + 2);
 		set_double_output_fd(target, node);
@@ -76,7 +76,7 @@ void	output_redirection_sign(char *cmd_str, t_cmd *node)
 		return ;
 	}
 	loc = is_single_output(cmd_str);
-	if (loc)
+	if (loc >= 0)
 	{
 		target = get_redirection_target(cmd_str + loc + 1);
 		set_single_output_fd(target, node);

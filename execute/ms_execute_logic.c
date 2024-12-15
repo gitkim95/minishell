@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_child_process.c                                 :+:      :+:    :+:   */
+/*   ms_execute_logic.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 18:56:08 by gitkim           ###   ########.fr       */
+/*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
+/*   Updated: 2024/12/15 16:09:09 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "ms_execute.h"
+#include "ms_utils.h"
 
-void	child_process(t_cmd_list *list, pid_t *pid)
+void	execute_logic(t_cmd_list *list)
 {
-	t_cmd	*node;
-	int		idx;
+	pid_t	*pid;
 
-	node = list->head;
-	idx = 0;
-	while (idx < list->size)
-	{
-		pid[idx] = fork();
-		if (pid[idx] == -1)
-		{
-			//error;
-		}
-		else if (pid[idx] == 0)
-		{
-			free(pid);
-			pipe_connect_process(node, list, idx);
-		}
-		idx++;
-		node = node->next;
-	}
+	pid = init_pid_arr(list);
+	alloc_pipe_fd(list);
+	init_pipe_fd(list);
+	process_loop(list, pid);
+	// ms_terminator(list, 0, 0);
 }

@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ms_make_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 20:21:01 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/15 17:11:45 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ms_parse.h"
 #include "ms_env.h"
+#include "ms_builtin.h"
+#include "ms_utils.h"
 #include "libft.h"
 
-t_cmd	*make_new_node(char *cmd_str, char **path)
+static t_cmd	*make_new_node(char *cmd_str, char **path)
 {
 	char	**cmd_split;
 	t_cmd	*new_node;
@@ -26,18 +28,19 @@ t_cmd	*make_new_node(char *cmd_str, char **path)
 	set_cmd_struct_zero(new_node);
 	output_redirection_sign(cmd_str, new_node);
 	input_redirection_sign(cmd_str, new_node);
+	set_isspace_to_blank(cmd_str);
 	cmd_split = append_cmd_options(cmd_str);
 	if (!cmd_split)
 		exit(ENOMEM);
-	cmd_split[0] = parse_cmd_path(cmd_split[0], path);
+	if (!is_builtin(cmd_split[0]))
+		cmd_split[0] = parse_cmd_path(cmd_split[0], path);
 	if (!cmd_split)
 		exit(ENOMEM);
 	new_node->av = cmd_split;
-	cmd_str = NULL;
 	return (new_node);
 }
 
-void	list_add_back(t_cmd_list *list, t_cmd *node)
+static void	list_add_back(t_cmd_list *list, t_cmd *node)
 {
 	if (!list->head)
 	{
@@ -70,4 +73,5 @@ void	make_list(t_cmd_list *list, char **cmd_split)
 		list_add_back(list, node);
 		i++;
 	}
+	free_split(path);
 }

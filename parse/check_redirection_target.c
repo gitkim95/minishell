@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:30:07 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 15:58:05 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 17:44:31 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_double_input(char *cmd_str)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 int	is_single_input(char *cmd_str)
@@ -59,7 +59,7 @@ int	is_single_input(char *cmd_str)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 int	is_double_output(char *cmd_str)
@@ -73,7 +73,7 @@ int	is_double_output(char *cmd_str)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 int	is_single_output(char *cmd_str)
@@ -87,5 +87,5 @@ int	is_single_output(char *cmd_str)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }

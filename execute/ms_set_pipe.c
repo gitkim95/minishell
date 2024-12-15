@@ -6,14 +6,14 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:55:14 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 18:57:57 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 17:12:45 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ms_execute.h"
 
-void	set_input_descriptor(t_cmd *node, t_cmd_list *list, int idx)
+static void	set_input_descriptor(t_cmd *node, t_cmd_list *list, int idx)
 {
 	if (node->s_in_fd != -1 || node->d_in_eof)
 	{
@@ -35,11 +35,11 @@ void	set_input_descriptor(t_cmd *node, t_cmd_list *list, int idx)
 		return ;
 }
 
-void	set_output_descriptor(t_cmd *node, t_cmd_list *list, int idx)
+static void	set_output_descriptor(t_cmd *node, t_cmd_list *list, int idx)
 {
 	if (node->s_out_fd != -1 || node->d_out_fd != -1)
 	{
-		if  (node->s_out_fd != -1)
+		if (node->s_out_fd != -1)
 			dup2(node->s_out_fd, STDOUT_FILENO);
 		else
 			dup2(node->d_out_fd, STDOUT_FILENO);
@@ -54,4 +54,5 @@ void	pipe_connect_process(t_cmd *node, t_cmd_list *list, int idx)
 {
 	set_input_descriptor(node, list, idx);
 	set_output_descriptor(node, list, idx);
+	close_all_fd(list);
 }

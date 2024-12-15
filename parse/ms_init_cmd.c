@@ -6,13 +6,40 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:49 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/11 21:47:24 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/14 22:26:26 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_parse.h"
 #include "ms_utils.h"
 #include "libft.h"
+
+void	set_isspace_to_blank(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '\'')
+		{
+			while (cmd[i + 1] && cmd[i + 1] != '\'')
+				i++;
+			if (cmd[i + 1] == '\'')
+				i++;
+		}
+		else if (cmd[i] == '\"')
+		{
+			while (cmd[i + 1] && cmd[i + 1] != '\"')
+				i++;
+			if (cmd[i + 1] == '\"')
+				i++;
+		}
+		else if (ft_isspace(cmd[i]))
+			cmd[i] = ' ';
+		i++;
+	}
+}
 
 void	set_list_struct_zero(t_cmd_list *list)
 {
