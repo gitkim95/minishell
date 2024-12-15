@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:13:38 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 16:02:32 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 20:06:47 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include "ms_execute.h"
 #include "ms_builtin.h"
+#include "ms_env.h"
 #include "ms_utils.h"
 
 void	execute_bulitin(t_cmd *node, t_cmd_list *list, int flag)
@@ -26,9 +27,13 @@ void	execute_bulitin(t_cmd *node, t_cmd_list *list, int flag)
 
 void	execute_cmd(t_cmd *node, t_cmd_list *list)
 {
-	if (execve(node->av[0], node->av, NULL) == -1)
+	char	**envp;
+
+	envp = get_env_array();
+	if (execve(node->av[0], node->av, envp) == -1)
 	{
 		perror(node->av[0]);
+		free_split(envp);
 		ms_terminator(list, errno, 1);
 	}
 }
