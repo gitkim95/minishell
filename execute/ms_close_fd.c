@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:57:47 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 02:38:20 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 16:02:09 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	free_pipe(t_cmd_list *list)
 	while (idx < list->size - 1)
 	{
 		free(list->pipe_fd[idx]);
+		list->pipe_fd[idx] = NULL;
 		idx++;
 	}
 	free(list->pipe_fd);
+	list->pipe_fd = NULL;
 }
 
 void	close_pipe_fd(t_cmd_list *list)

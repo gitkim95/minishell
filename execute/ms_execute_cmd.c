@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:13:38 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 02:45:02 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 16:02:32 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 
 void	execute_bulitin(t_cmd *node, t_cmd_list *list, int flag)
 {
-	int	exit_code;
-
 	exec_builtin(node->av);
 	if (flag == BUILTIN_HAS_OUTPUT)
 		ms_terminator(list, 0, 1);

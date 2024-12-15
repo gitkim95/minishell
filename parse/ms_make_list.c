@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/14 21:34:51 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 15:57:25 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ms_parse.h"
 #include "ms_env.h"
 #include "ms_builtin.h"
+#include "ms_utils.h"
 #include "libft.h"
 
 t_cmd	*make_new_node(char *cmd_str, char **path)
@@ -73,4 +74,5 @@ void	make_list(t_cmd_list *list, char **cmd_split)
 		list_add_back(list, node);
 		i++;
 	}
+	free_split(path);
 }
