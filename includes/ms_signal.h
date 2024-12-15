@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_signal.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 18:31:05 by hwilkim          ###   ########.fr       */
+/*   Created: 2024/12/11 19:46:59 by hwilkim           #+#    #+#             */
+/*   Updated: 2024/12/15 18:20:57 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "ms_execute.h"
-#include "ms_env.h"
-#include "ms_signal.h"
-#include "ms_utils.h"
+#ifndef MS_SIGNAL_H
+# define MS_SIGNAL_H
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_cmd_list	list;
+void	register_signal_hander(void);
+void	reset_signal_hander(void);
 
-	(void) argc;
-	(void) argv;
-	register_signal_hander();
-	set_env_state(envp);
-	script_loop(&list);
-	handle_hash_leak();
-	return (0);
-}
+#endif

@@ -11,6 +11,7 @@ OBJS		=	$(SOURCES:.c=.o)	\
 				$(BUILTIN_OBJ)	\
 				$(ENV_OBJ)		\
 				$(HASH_OBJ)		\
+				$(SIGNAL_OBJ)
 
 BUILTIN_DIR	=	./builtin
 BUILTIN_SRC =	ms_builtin_cd.c		ms_builtin_echo.c	ms_builtin_env.c	\
@@ -49,6 +50,10 @@ PARSE_SRC	=	ms_init_cmd.c	\
 				check_redirection_target.c	\
 				check_redirection_sign.c
 PARSE_OBJ	=	$(addprefix $(PARSE_DIR)/, $(PARSE_SRC:.c=.o))
+
+SIGNAL_DIR	=	./signal
+SIGNAL_SRC	=	ms_signal.c
+SIGNAL_OBJ	=	$(addprefix $(SIGNAL_DIR)/, $(SIGNAL_SRC:.c=.o))
 
 LIBFTDIR	=	./libft
 LIBFT		=	$(LIBFTDIR)/libft.a
