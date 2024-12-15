@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 21:01:23 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/15 19:22:20 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/15 20:06:43 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_hash	*get_env_hash(void)
 	return (*env_hash);
 }
 
-char	**get_env_str_arr(void)
+char	**get_env_array(void)
 {
 	int			idx;
 	int			env_count;

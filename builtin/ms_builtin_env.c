@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/15 19:51:24 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/15 20:06:39 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ms_builtin_env(char **argv)
 	char		**env_arr;
 
 	(void) argv;
-	env_arr = get_env_str_arr();
+	env_arr = get_env_array();
 	print_env(env_arr);
 	free_split(env_arr);
 	return (0);
