@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 02:24:40 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 16:09:09 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	execute_logic(t_cmd_list *list)
 	alloc_pipe_fd(list);
 	init_pipe_fd(list);
 	process_loop(list, pid);
-	ms_terminator(list, 0, 0);
+	// ms_terminator(list, 0, 0);
 }

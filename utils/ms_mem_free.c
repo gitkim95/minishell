@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:52:34 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 02:33:20 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 16:08:17 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	clear_ms_list(t_cmd_list *list)
 
 void	ms_terminator(t_cmd_list *list, int exit_code, int exit_flag)
 {
+	handle_hash_leak();
 	if (list->head)
 		clear_ms_list(list);
 	if (exit_flag)
