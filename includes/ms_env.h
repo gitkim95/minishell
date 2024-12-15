@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 21:03:13 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 15:36:37 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/15 18:56:57 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 /* ms_env */
 t_hash	*get_env_hash(void);
+char	**get_env_str_arr(void);
 void	set_env_state(char *envp[]);
 
 /* ms_env_utils */
