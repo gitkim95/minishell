@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:05:58 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/14 21:35:02 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 17:00:49 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	set_cmd_struct_zero(t_cmd *cmd);
 void	init_struct(char *str, t_cmd_list *list);
 
 //ms_make_list.c
-t_cmd	*make_new_node(char *cmd_str, char **path);
-void	list_add_back(t_cmd_list *list, t_cmd *node);
 void	make_list(t_cmd_list *list, char **cmd_split);
 
 //ms_open_fd.c

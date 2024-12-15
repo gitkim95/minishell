@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 02:41:40 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 16:52:33 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "ms_execute.h"
 #include "ms_builtin.h"
 
-void	parent_process(t_cmd_list *list, pid_t *pid)
+static void	parent_process(t_cmd_list *list, pid_t *pid)
 {
 	int	idx;
 
@@ -32,7 +32,7 @@ void	parent_process(t_cmd_list *list, pid_t *pid)
 	free(pid);
 }
 
-void	child_process(t_cmd *node, t_cmd_list *list, int idx)
+static void	child_process(t_cmd *node, t_cmd_list *list, int idx)
 {
 	pipe_connect_process(node, list, idx);
 	if (is_builtin(node->av[0]) == BUILTIN_HAS_OUTPUT)

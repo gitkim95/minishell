@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:37:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 02:03:48 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 17:13:34 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 void	execute_logic(t_cmd_list *list);
 
 //ms_close_fd.c
-void	free_pipe(t_cmd_list *list);
-void	close_pipe_fd(t_cmd_list *list);
-void	close_io_fd(t_cmd_list *list);
 void	close_all_fd(t_cmd_list *list);
 
 //ms_execute_cmd.c
@@ -41,8 +38,6 @@ pid_t	*init_pid_arr(t_cmd_list *list);
 void	script_loop(t_cmd_list *list);
 
 //ms_set_pipe.c
-void	set_input_descriptor(t_cmd *node, t_cmd_list *list, int idx);
-void	set_output_descriptor(t_cmd *node, t_cmd_list *list, int idx);
 void	pipe_connect_process(t_cmd *node, t_cmd_list *list, int idx);
 
 #endif

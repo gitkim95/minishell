@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:57:47 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 16:02:09 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 17:13:29 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "ms_execute.h"
 
-void	free_pipe(t_cmd_list *list)
+static void	free_pipe(t_cmd_list *list)
 {
 	int	idx;
 
@@ -31,7 +31,7 @@ void	free_pipe(t_cmd_list *list)
 	list->pipe_fd = NULL;
 }
 
-void	close_pipe_fd(t_cmd_list *list)
+static void	close_pipe_fd(t_cmd_list *list)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ void	close_pipe_fd(t_cmd_list *list)
 	}
 }
 
-void	close_io_fd(t_cmd_list *list)
+static void	close_io_fd(t_cmd_list *list)
 {
 	t_cmd	*node;
 

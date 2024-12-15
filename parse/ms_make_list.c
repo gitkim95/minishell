@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 15:57:25 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/15 17:11:45 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "ms_utils.h"
 #include "libft.h"
 
-t_cmd	*make_new_node(char *cmd_str, char **path)
+static t_cmd	*make_new_node(char *cmd_str, char **path)
 {
 	char	**cmd_split;
 	t_cmd	*new_node;
@@ -37,11 +37,10 @@ t_cmd	*make_new_node(char *cmd_str, char **path)
 	if (!cmd_split)
 		exit(ENOMEM);
 	new_node->av = cmd_split;
-	cmd_str = NULL;
 	return (new_node);
 }
 
-void	list_add_back(t_cmd_list *list, t_cmd *node)
+static void	list_add_back(t_cmd_list *list, t_cmd *node)
 {
 	if (!list->head)
 	{
