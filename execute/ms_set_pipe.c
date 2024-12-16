@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:55:14 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 17:12:45 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/16 11:48:12 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ static void	set_input_descriptor(t_cmd *node, t_cmd_list *list, int idx)
 		if (node->s_in_fd != -1)
 			dup2(node->s_in_fd, STDIN_FILENO);
 		else
-		{
-			//heredoc handling;
-		}
+			handle_heredoc(node, list);
 	}
 	else if (node->prev)
 	{
@@ -54,5 +52,5 @@ void	pipe_connect_process(t_cmd *node, t_cmd_list *list, int idx)
 {
 	set_input_descriptor(node, list, idx);
 	set_output_descriptor(node, list, idx);
-	close_all_fd(list);
+	close_all_fd(list, node);
 }

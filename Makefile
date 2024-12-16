@@ -39,7 +39,8 @@ EXEC_SRC	=	ms_execute_logic.c	\
 				ms_processing.c	\
 				ms_init_var.c	\
 				ms_script_loop.c	\
-				ms_set_pipe.c
+				ms_set_pipe.c	\
+				ms_handle_heredoc.c
 EXEC_OBJ	=	$(addprefix $(EXEC_DIR)/, $(EXEC_SRC:.c=.o))
 
 PARSE_DIR	=	./parse

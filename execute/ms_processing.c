@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 16:52:33 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/16 11:48:52 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	parent_process(t_cmd_list *list, pid_t *pid)
 {
 	int	idx;
 
-	close_all_fd(list);
+	close_all_fd(list, NULL);
 	idx = 0;
 	while (idx < list->size)
 	{

@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:00:51 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 17:44:53 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/16 12:15:08 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	input_redirection_sign(char *cmd_str, t_cmd *node)
 	{
 		target = get_redirection_target(cmd_str + loc + 2);
 		set_eof(target, node);
-		free(target);
 		delete_redirection(cmd_str, loc, 2);
 		return ;
 	}

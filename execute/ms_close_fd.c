@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:57:47 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 17:13:29 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/16 12:03:32 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,24 @@ static void	close_io_fd(t_cmd_list *list)
 	}
 }
 
-void	close_all_fd(t_cmd_list *list)
+static void	close_heredoc_fd(t_cmd *node)
 {
+	if (node->hd_pipe_fd[0] != -1)
+	{
+		close(node->hd_pipe_fd[0]);
+		node->hd_pipe_fd[0] = -1;
+	}
+	if (node->hd_pipe_fd[1] != -1)
+	{
+		close(node->hd_pipe_fd[1]);
+		node->hd_pipe_fd[1] = -1;
+	}
+}
+
+void	close_all_fd(t_cmd_list *list, t_cmd *node)
+{
+	if (node)
+		close_heredoc_fd(node);
 	close_io_fd(list);
 	close_pipe_fd(list);
 	free_pipe(list);

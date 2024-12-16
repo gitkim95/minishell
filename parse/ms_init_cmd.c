@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:49 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/14 22:26:26 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/16 11:57:37 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	set_cmd_struct_zero(t_cmd *cmd)
 	cmd->s_in_fd = -1;
 	cmd->s_out_fd = -1;
 	cmd->d_out_fd = -1;
+	cmd->hd_pipe_fd[0] = -1;
+	cmd->hd_pipe_fd[1] = -1;
 }
 
 void	init_struct(char *str, t_cmd_list *list)
