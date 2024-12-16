@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:15:16 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/16 12:22:12 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/16 13:09:08 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ static void	get_stdin(t_cmd *node, t_cmd_list *list)
 {
 	char	buf[MS_BUFFER_SIZE + 1];
 	int		read_len;
-	int		eof_len;
 
-	eof_len = ft_strlen(node->d_in_eof);
 	while (1)
 	{
 		ft_putstr_fd("> ", 2);
@@ -32,10 +30,10 @@ static void	get_stdin(t_cmd *node, t_cmd_list *list)
 		{
 			//error;
 		}
-		buf[read_len] = '\0';
-		if (!read_len || !ft_strncmp(buf, node->d_in_eof, eof_len))
+		buf[read_len - 1] = '\0';
+		if (!read_len || !ft_strcmp(buf, node->d_in_eof))
 			ms_terminator(list, 0, 1);
-		write(STDOUT_FILENO, buf, read_len);
+		ft_putendl_fd(buf, STDOUT_FILENO);
 	}
 }
 
