@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_heredoc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:15:16 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/16 13:09:08 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/16 13:57:46 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "ms_utils.h"
 #include "libft.h"
 
-static void	get_stdin(t_cmd *node, t_cmd_list *list)
+static void	get_stdin(t_cmd *node)
 {
 	char	buf[MS_BUFFER_SIZE + 1];
 	int		read_len;
@@ -32,7 +32,7 @@ static void	get_stdin(t_cmd *node, t_cmd_list *list)
 		}
 		buf[read_len - 1] = '\0';
 		if (!read_len || !ft_strcmp(buf, node->d_in_eof))
-			ms_terminator(list, 0, 1);
+			return ;
 		ft_putendl_fd(buf, STDOUT_FILENO);
 	}
 }
@@ -49,7 +49,9 @@ static void	grandchild_process(t_cmd *node, t_cmd_list *list)
 {
 	dup2(node->hd_pipe_fd[1], STDOUT_FILENO);
 	close_all_fd(list, node);
-	get_stdin(node, list);
+	get_stdin(node);
+	handle_hash_leak();
+	ms_terminator(list, 0, 1);
 }
 
 void	handle_heredoc(t_cmd *node, t_cmd_list *list)

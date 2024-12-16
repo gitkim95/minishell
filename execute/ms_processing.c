@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_processing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/16 11:48:52 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/16 13:57:48 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	parent_process(t_cmd_list *list, pid_t *pid)
 
 static void	child_process(t_cmd *node, t_cmd_list *list, int idx)
 {
-	pipe_connect_process(node, list, idx);
+	pipe_connect(node, list, idx);
 	if (is_builtin(node->av[0]) == BUILTIN_HAS_OUTPUT)
 		execute_bulitin(node, list, BUILTIN_HAS_OUTPUT);
 	else

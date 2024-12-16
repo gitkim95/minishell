@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_mem_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:52:34 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/16 12:27:46 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/16 13:57:53 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	clear_ms_list(t_cmd_list *list)
 
 void	ms_terminator(t_cmd_list *list, int exit_code, int exit_flag)
 {
-	// handle_hash_leak();
 	if (list->head)
 		clear_ms_list(list);
 	if (exit_flag)

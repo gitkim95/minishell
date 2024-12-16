@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:37:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/16 11:57:15 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/16 13:57:51 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	process_loop(t_cmd_list *list, pid_t *pid);
 void	script_loop(t_cmd_list *list);
 
 //ms_set_pipe.c
-void	pipe_connect_process(t_cmd *node, t_cmd_list *list, int idx);
+void	pipe_connect(t_cmd *node, t_cmd_list *list, int idx);
 
 #endif
