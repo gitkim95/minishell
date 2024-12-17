@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_heredoc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:15:16 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/20 03:29:40 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/20 16:59:30 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <sys/wait.h>
 #include <stdio.h>
 #include "ms_execute.h"
+#include "ms_signal.h"
 #include "ms_utils.h"
 #include "libft.h"
 
@@ -41,6 +42,7 @@ static void	get_stdin(t_cmd *node, t_cmd_list *list)
 
 static void	heredoc_process(t_cmd *node, t_cmd_list *list)
 {
+	reset_signal_handler();
 	dup2(node->hd_pipe_fd[1], STDOUT_FILENO);
 	close_all_fd(list, node);
 	get_stdin(node, list);

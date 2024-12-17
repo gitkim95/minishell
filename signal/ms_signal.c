@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:47:55 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/15 18:20:35 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/17 19:57:29 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 
 static void	readline_signal_handler(int sig);
 
-void	register_signal_hander(void)
+void	register_signal_handler(void)
 {
 	rl_catch_signals = 0;
 	signal(SIGINT, readline_signal_handler);
 	signal(SIGQUIT, readline_signal_handler);
 }
 
-void	reset_signal_hander(void)
+void	reset_signal_handler(void)
 {
 	rl_catch_signals = 1;
 	signal(SIGINT, SIG_DFL);

@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 18:31:05 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/17 18:10:18 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-	register_signal_hander();
+	register_signal_handler();
 	set_env_state(envp);
 	script_loop(&list);
 	handle_hash_leak();
