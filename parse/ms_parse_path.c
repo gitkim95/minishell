@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:58:53 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 20:16:58 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/17 19:24:14 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ char	*parse_cmd_path(char *cmd, char **path)
 {
 	char	buf[MS_BUFFER_SIZE];
 
+	if (!cmd)
+		return (cmd);
+	if (*cmd == '/')
+		return (cmd);
 	while (*path)
 	{
 		buf[0] = '\0';

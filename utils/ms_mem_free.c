@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:52:34 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/17 17:00:01 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/17 21:13:08 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	clear_ms_list(t_cmd_list *list)
 		free(temp->d_in_eof);
 		free(temp);
 	}
+	list->size = 0;
 	list->head = NULL;
 	list->tail = NULL;
 }
@@ -62,9 +63,5 @@ void	ms_terminator(t_cmd_list *list, int exit_flag, int exit_code)
 	if (list->head)
 		clear_ms_list(list);
 	if (exit_flag)
-	{
-		if (exit_code)
-			perror(NULL);
 		exit(exit_code);
-	}
 }
