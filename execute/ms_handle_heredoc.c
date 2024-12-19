@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:15:16 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/17 20:10:59 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/20 03:29:40 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	get_stdin(t_cmd *node, t_cmd_list *list)
 		{
 			perror(NULL);
 			ms_terminator(list, 1, errno);
-		}			
+		}
 		buf[read_len - 1] = '\0';
 		if (!read_len || !ft_strcmp(buf, node->d_in_eof))
 			return ;

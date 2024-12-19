@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/19 18:41:38 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/20 02:05:33 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_cmd	*make_new_node(char *cmd_str, char **path)
 	output_redirection_sign(cmd_str, new_node);
 	input_redirection_sign(cmd_str, new_node);
 	set_isspace_to_blank(cmd_str);
+	handle_env_sign(&cmd_str);
 	cmd_split = append_cmd_options(cmd_str);
 	if (!cmd_split)
 		exit(ENOMEM);
@@ -74,54 +75,4 @@ void	make_list(t_cmd_list *list, char **cmd_split)
 		i++;
 	}
 	free_split(path);
-}
-
-char	*change_to_env(char *cmd_str, int *idx, int find_key)
-{
-	char	*env_key;
-	char	*env_value;
-	char	*new_cmd_str;
-
-	env_key = ft_substr(cmd_str, *idx + 1, len - find_key);
-	env_value = ms_get_env(env_key);
-	if (env_value)
-	{
-		new_cmd_str = ft_substr(cmd_str, 0, find_key - 1)
-	}
-	else
-	{
-
-	}
-	free(env_key);
-	free(cmd_str);
-	return (new_cmd_str);
-}
-
-char	*handle_env_sign(char **cmd_str)
-{
-	int		i;
-	int		find_key;
-	char	*env_key;
-	char	*new_cmd_str;
-
-	i = 0;
-	while (*cmd_str[i])
-	{
-		if (cmd_str[i] == '\'')
-		{
-			i++;
-			while (cmd_str[i] != '\'' || cmd_str[i] != '\0')
-				i++;
-		}
-		else if (cmd_str[i] == '$')
-		{
-			if (cmd_str[++i] != ' ' || cmd_str[i] != '\0')
-			{
-				find_key = i + 1;
-				while (cmd_str[find_key] != ' ' || cmd_str[find_key] != '\0')
-					find_key++;
-				*cmd_str = change_to_env(cmd_str, &i, find_key);
-			}
-		}
-	}
 }
