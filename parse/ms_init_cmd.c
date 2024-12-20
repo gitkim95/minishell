@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:49 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/16 11:57:37 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/20 22:28:22 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_parse.h"
 #include "ms_utils.h"
+#include "ms_execute.h"
 #include "libft.h"
+
+static void	input_heredoc_data(t_cmd_list *list);
 
 void	set_isspace_to_blank(char *cmd)
 {
@@ -64,4 +67,18 @@ void	init_struct(char *str, t_cmd_list *list)
 		exit(ENOMEM);
 	make_list(list, temp);
 	free_split(temp);
+	input_heredoc_data(list);
+}
+
+static void	input_heredoc_data(t_cmd_list *list)
+{
+	t_cmd	*cmd_node;
+
+	cmd_node = list->head;
+	while (cmd_node)
+	{
+		if (cmd_node->d_in_eof)
+			handle_heredoc(cmd_node, list);
+		cmd_node = cmd_node -> next;
+	}
 }
