@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 01:30:56 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/20 02:00:15 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 02:09:22 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	handle_env_sign(char **cmd_str)
 			if ((*cmd_str)[++idx] != ' ' || (*cmd_str)[idx])
 			{
 				key_idx = idx;
-				while ((*cmd_str)[key_idx] != ' ' && (*cmd_str)[key_idx])
+				while ((*cmd_str)[key_idx] != ' ' && (*cmd_str)[key_idx] && \
+					(*cmd_str)[key_idx] != '\'' && (*cmd_str)[key_idx] != '\"')
 					key_idx++;
 				*cmd_str = change_to_env(*cmd_str, &idx, key_idx);
 			}
