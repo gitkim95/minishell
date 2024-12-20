@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:05:58 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/20 01:32:25 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/20 16:41:44 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int		is_single_output(char *cmd_str);
 //handle_env_sign.c
 void	handle_env_sign(char **cmd_str);
 
+//handle_quote_mark.c
+char	**append_cmd_options(char *arg);
+
 //ms_init_cmd.c
 void	set_isspace_to_blank(char *cmd);
 void	set_list_struct_zero(t_cmd_list *list);
@@ -46,7 +49,6 @@ void	set_double_output_fd(char *target, t_cmd *node);
 
 //ms_parse_path.c
 char	**get_path(char *path);
-char	**append_cmd_options(char *arg);
 char	*parse_cmd_path(char *cmd, char **path);
 
 #endif

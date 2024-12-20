@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:58:53 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/17 19:24:14 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/20 16:42:03 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,6 @@ char	**get_path(char *path)
 	if (!path_split)
 		exit(ENOMEM);
 	return (path_split);
-}
-
-char	**append_cmd_options(char *arg)
-{
-	int		idx;
-	char	**argv;
-	char	buf[MS_BUFFER_SIZE];
-
-	argv = ft_split(arg, ' ');
-	if (!argv)
-		exit(ENOMEM);
-	if (!argv[1] || !ft_strchr(argv[1], '\''))
-		return (argv);
-	buf[0] = '\0';
-	idx = 1;
-	while (argv[idx])
-	{
-		ft_strcat(buf, argv[idx]);
-		ft_strcat(buf, " ");
-		free(argv[idx]);
-		argv[idx++] = NULL;
-	}
-	argv[1] = ft_strtrim(buf, " \'\"");
-	if (!argv[1])
-		exit(ENOMEM);
-	return (argv);
 }
 
 char	*parse_cmd_path(char *cmd, char **path)
