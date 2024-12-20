@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:05:58 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 17:00:49 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/20 01:32:25 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int		is_double_input(char *cmd_str);
 int		is_single_input(char *cmd_str);
 int		is_double_output(char *cmd_str);
 int		is_single_output(char *cmd_str);
+
+//handle_env_sign.c
+void	handle_env_sign(char **cmd_str);
 
 //ms_init_cmd.c
 void	set_isspace_to_blank(char *cmd);

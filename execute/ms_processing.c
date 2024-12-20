@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_processing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/16 13:57:48 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/17 21:10:00 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <sys/wait.h>
 #include "ms_execute.h"
 #include "ms_builtin.h"
+#include "ms_utils.h"
 
 static void	parent_process(t_cmd_list *list, pid_t *pid)
 {
@@ -35,8 +36,8 @@ static void	parent_process(t_cmd_list *list, pid_t *pid)
 static void	child_process(t_cmd *node, t_cmd_list *list, int idx)
 {
 	pipe_connect(node, list, idx);
-	if (is_builtin(node->av[0]) == BUILTIN_HAS_OUTPUT)
-		execute_bulitin(node, list, BUILTIN_HAS_OUTPUT);
+	if (is_builtin(node->av[0]))
+		execute_bulitin(node, list, 1);
 	else
 		execute_cmd(node, list);
 }
@@ -50,18 +51,16 @@ void	process_loop(t_cmd_list *list, pid_t *pid)
 	idx = 0;
 	while (idx < list->size)
 	{
-		if (is_builtin(node->av[0]) == BUILTIN_NO_OUTPUT)
-			execute_bulitin(node, list, BUILTIN_NO_OUTPUT);
-		else
+		pid[idx] = fork();
+		if (pid[idx] == -1)
 		{
-			pid[idx] = fork();
-			if (pid[idx] == -1)
-				perror(NULL);
-			else if (pid[idx] == 0)
-			{
-				free(pid);
-				child_process(node, list, idx);
-			}
+			perror(NULL);
+			ms_terminator(list, 1, errno);
+		}
+		else if (pid[idx] == 0)
+		{
+			free(pid);
+			child_process(node, list, idx);
 		}
 		idx++;
 		node = node->next;

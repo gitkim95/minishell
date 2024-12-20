@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hash_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 20:53:29 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 15:34:42 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/17 20:01:24 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_hash_node	*get_hash_node(t_hash *hash, char *key)
 	size_t		hash_code;
 	t_hash_node	*node;
 
+	if (!key)
+		return (NULL);
 	hash_code = get_hash_code(key, ft_strlen(key));
 	node = (hash->table)[hash_code].head;
 	while (node)

@@ -6,13 +6,15 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:16:59 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 02:41:09 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/17 20:44:43 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 #include "ms_execute.h"
+#include "ms_utils.h"
 #include "libft.h"
 
 void	alloc_pipe_fd(t_cmd_list *list)
@@ -22,7 +24,8 @@ void	alloc_pipe_fd(t_cmd_list *list)
 	list->pipe_fd = (int **)malloc(sizeof(int *) * (list->size - 1));
 	if (!list->pipe_fd)
 	{
-		//error;
+		perror(NULL);
+		ms_terminator(list, 1, errno);
 	}
 	idx = 0;
 	while (idx < list->size - 1)
@@ -30,7 +33,8 @@ void	alloc_pipe_fd(t_cmd_list *list)
 		list->pipe_fd[idx] = (int *)malloc(sizeof(int) * 2);
 		if (!list->pipe_fd[idx])
 		{
-			//error;
+			perror(NULL);
+			ms_terminator(list, 1, errno);
 		}
 		list->pipe_fd[idx][0] = -1;
 		list->pipe_fd[idx][1] = -1;
@@ -47,7 +51,8 @@ void	init_pipe_fd(t_cmd_list *list)
 	{
 		if (pipe(list->pipe_fd[idx]) == -1)
 		{
-			//error;
+			perror(NULL);
+			ms_terminator(list, 1, errno);
 		}
 		idx++;
 	}
@@ -60,7 +65,8 @@ pid_t	*init_pid_arr(t_cmd_list *list)
 	pid = (pid_t *)malloc(sizeof(pid_t) * list->size);
 	if (!pid)
 	{
-		//error;
+		perror(NULL);
+		ms_terminator(list, 1, errno);
 	}
 	ft_memset(pid, -2, sizeof(pid_t) * list->size);
 	return (pid);

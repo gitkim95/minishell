@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:55 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 02:25:40 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/17 16:54:47 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int		ft_strcmp(char *s1, char *s2);
 void	handle_hash_leak(void);
 void	free_split(char **split);
 void	clear_ms_list(t_cmd_list *list);
-void	ms_terminator(t_cmd_list *list, int exit_code, int exit_flag);
+void	ms_terminator(t_cmd_list *list, int exit_flag, int exit_code);
 
 #endif

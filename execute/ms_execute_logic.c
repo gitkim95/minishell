@@ -6,20 +6,47 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/16 12:27:03 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/17 21:06:33 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include "ms_builtin.h"
 #include "ms_execute.h"
 #include "ms_utils.h"
+
+static void	restore_std_fds(int *std_fds)
+{
+	dup2(std_fds[0], STDIN_FILENO);
+	dup2(std_fds[1], STDOUT_FILENO);
+	dup2(std_fds[2], STDERR_FILENO);
+}
+
+static void	store_std_fds(int *std_fds)
+{
+	std_fds[0] = dup(STDIN_FILENO);
+	std_fds[1] = dup(STDOUT_FILENO);
+	std_fds[2] = dup(STDERR_FILENO);
+}
 
 void	execute_logic(t_cmd_list *list)
 {
 	pid_t	*pid;
+	int		std_fds[3];
 
-	pid = init_pid_arr(list);
 	alloc_pipe_fd(list);
 	init_pipe_fd(list);
-	process_loop(list, pid);
+	if (list->size == 1 && is_builtin(list->head->av[0]))
+	{
+		store_std_fds(std_fds);
+		pipe_connect(list->head, list, 0);
+		execute_bulitin(list->head, list, 0);
+		restore_std_fds(std_fds);
+	}
+	else
+	{
+		pid = init_pid_arr(list);
+		process_loop(list, pid);
+	}
 	ms_terminator(list, 0, 0);
 }
