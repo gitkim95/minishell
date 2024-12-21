@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 02:15:22 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 02:19:29 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 22:15:14 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*realloc_option(char *option, int *idx, int *quotes_idx)
 		*idx -= 2;
 	}
 	free(option);
+	option = NULL;
 	return (ft_strdup(buf));
 }
 
@@ -58,7 +59,7 @@ void	set_quotes_idx(char *option, int *idx, char quote, int *quotes_idx)
 	}
 }
 
-void	delete_quotes(char **option)
+void	delete_quotes(char **option, int *flag)
 {
 	int	idx;
 	int	quotes_idx[2];
@@ -73,7 +74,11 @@ void	delete_quotes(char **option)
 		else if ((*option)[idx] == '\"')
 			set_quotes_idx(*option, &idx, '\"', quotes_idx);
 		if (quotes_idx[0] != -1 && quotes_idx[1] != -1)
+		{
 			*option = realloc_option(*option, &idx, quotes_idx);
+			if (flag)
+				*flag = 1;
+		}
 		idx++;
 	}
 }

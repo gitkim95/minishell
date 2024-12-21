@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:00:51 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/16 12:15:08 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 22:11:36 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #include "ms_utils.h"
 #include "libft.h"
 
-static void	delete_redirection(char *cmd, int loc, int sign_size)
+static void	delete_redirection(char *cmd, int loc, int sign_size, char *target)
 {
 	int		idx;
+	int		target_idx;
 
 	idx = 0;
 	while (idx < sign_size)
@@ -26,13 +27,14 @@ static void	delete_redirection(char *cmd, int loc, int sign_size)
 	}
 	while (ft_isspace(cmd[idx + loc]))
 	{
-		cmd[idx + loc] = ' ';
+		cmd[loc + idx] = ' ';
 		idx++;
 	}
-	while (cmd[idx + loc] && !ft_isspace(cmd[idx + loc]))
+	target_idx = 0;
+	while (target[target_idx] == cmd[loc + idx + target_idx])
 	{
-		cmd[idx + loc] = ' ';
-		idx++;
+		cmd[loc + idx + target_idx] = ' ';
+		target_idx++;
 	}
 }
 
@@ -45,17 +47,19 @@ void	input_redirection_sign(char *cmd_str, t_cmd *node)
 	if (loc >= 0)
 	{
 		target = get_redirection_target(cmd_str + loc + 2);
+		delete_redirection(cmd_str, loc, 2, target);
+		delete_quotes(&target, &(node->heredoc_quote_flag));
 		set_eof(target, node);
-		delete_redirection(cmd_str, loc, 2);
 		return ;
 	}
 	loc = is_single_input(cmd_str);
 	if (loc >= 0)
 	{
 		target = get_redirection_target(cmd_str + loc + 1);
+		delete_redirection(cmd_str, loc, 1, target);
+		delete_quotes(&target, NULL);
 		set_single_input_fd(target, node);
 		free(target);
-		delete_redirection(cmd_str, loc, 1);
 		return ;
 	}
 }
@@ -69,18 +73,20 @@ void	output_redirection_sign(char *cmd_str, t_cmd *node)
 	if (loc >= 0)
 	{
 		target = get_redirection_target(cmd_str + loc + 2);
+		delete_redirection(cmd_str, loc, 2, target);
+		delete_quotes(&target, NULL);
 		set_double_output_fd(target, node);
 		free(target);
-		delete_redirection(cmd_str, loc, 2);
 		return ;
 	}
 	loc = is_single_output(cmd_str);
 	if (loc >= 0)
 	{
 		target = get_redirection_target(cmd_str + loc + 1);
+		delete_redirection(cmd_str, loc, 1, target);
+		delete_quotes(&target, NULL);
 		set_single_output_fd(target, node);
 		free(target);
-		delete_redirection(cmd_str, loc, 1);
 		return ;
 	}
 }

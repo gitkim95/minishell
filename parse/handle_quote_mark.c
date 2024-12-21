@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:40:32 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 02:37:34 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 22:11:56 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	refine_option(char **option)
 	temp = *option;
 	*option = ft_strtrim(*option, " ");
 	free(temp);
-	delete_quotes(option);
+	delete_quotes(option, NULL);
 }
 
 char	**append_cmd_options(char *arg)
@@ -91,3 +91,8 @@ char	**append_cmd_options(char *arg)
 	}
 	return (argv);
 }
+
+// void	handle_heredoc_eof_quotes(t_cmd *node)
+// {
+
+// }

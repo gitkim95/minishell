@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:05:58 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 02:18:51 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 22:10:20 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		is_single_output(char *cmd_str);
 
 //handle_env_sign.c
 void	handle_env_sign(char **cmd_str);
+void	handle_heredoc_env_sign(char **input);
 
 //handle_quote_mark.c
 char	**append_cmd_options(char *arg);
@@ -36,7 +37,7 @@ char	**append_cmd_options(char *arg);
 void	skip_quote(char *arg, int *idx, char quote);
 char	*realloc_option(char *option, int *idx, int *quotes_idx);
 void	set_quotes_idx(char *option, int *idx, char quote, int *quotes_idx);
-void	delete_quotes(char **option);
+void	delete_quotes(char **option, int *flag);
 
 //ms_init_cmd.c
 void	set_isspace_to_blank(char *cmd);
