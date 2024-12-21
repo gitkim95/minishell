@@ -59,7 +59,7 @@ PARSE_SRC	=	ms_init_cmd.c	\
 PARSE_OBJ	=	$(addprefix $(OBJS_DIR)/, $(PARSE_SRC:.c=.o))
 
 SIGNAL_DIR	=	./signal
-SIGNAL_SRC	=	ms_signal.c
+SIGNAL_SRC	=	ms_signal.c	ms_signal_heredoc.c
 SIGNAL_OBJ	=	$(addprefix $(OBJS_DIR)/, $(SIGNAL_SRC:.c=.o))
 
 LIBFTDIR	=	./libft

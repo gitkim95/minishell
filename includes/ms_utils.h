@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:55 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/17 16:54:47 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 16:25:39 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 char	*ft_strcat(char *dest, const char *src);
 int		ft_isspace(char c);
 int		ft_strcmp(char *s1, char *s2);
+int		ms_exit_status(int exit_status);
 
 //ms_mem_free.c
 void	handle_hash_leak(void);

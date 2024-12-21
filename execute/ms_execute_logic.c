@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_logic.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/17 21:06:33 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 17:48:18 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static void	restore_std_fds(int *std_fds)
 	dup2(std_fds[0], STDIN_FILENO);
 	dup2(std_fds[1], STDOUT_FILENO);
 	dup2(std_fds[2], STDERR_FILENO);
+	close(std_fds[0]);
+	close(std_fds[1]);
+	close(std_fds[2]);
 }
 
 static void	store_std_fds(int *std_fds)

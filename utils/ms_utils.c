@@ -6,10 +6,11 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/13 20:07:00 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/21 16:28:39 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/wait.h>
 #include "ms_utils.h"
 
 char	*ft_strcat(char *dest, const char *src)
@@ -54,4 +55,11 @@ int	ft_strcmp(char *s1, char *s2)
 	c1 = s1[idx];
 	c2 = s2[idx];
 	return (c1 - c2);
+}
+
+int	ms_exit_status(int exit_status)
+{
+	if (WIFEXITED(exit_status))
+		return (WEXITSTATUS(exit_status));
+	return (exit_status);
 }

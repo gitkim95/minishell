@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:37:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 13:13:48 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/21 16:36:01 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	execute_cmd(t_cmd *node, t_cmd_list *list);
 void	execute_logic(t_cmd_list *list);
 
 //ms_handle_heredoc.c
-void	handle_heredoc(t_cmd *node, t_cmd_list *list);
-void	terminal_state(int store_flag);
+int		handle_heredoc(t_cmd *node, t_cmd_list *list);
 
 //ms_init_var.c
 void	alloc_pipe_fd(t_cmd_list *list);

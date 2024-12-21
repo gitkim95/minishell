@@ -6,15 +6,11 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:15:16 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 13:14:09 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/21 17:40:54 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <readline/readline.h>
-#include <fcntl.h>
-#include <termios.h>
-#include <unistd.h>
-#include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
 #include "ms_execute.h"
@@ -37,7 +33,7 @@ static char	*append_input(char *prev, char *new)
 	return (input);
 }
 
-static void	get_stdin(t_cmd *node)
+static void	get_stdin(char *eof, int write_pipe_fd)
 {
 	char	*input;
 	char	*line;
@@ -51,25 +47,25 @@ static void	get_stdin(t_cmd *node)
 			ft_putendl_fd("", STDOUT_FILENO);
 			break ;
 		}
-		if (!ft_strcmp(line, node->d_in_eof))
+		if (!ft_strcmp(line, eof))
 			break ;
 		input = append_input(input, line);
 	}
 	free(line);
-	ft_putendl_fd(input, node->hd_pipe_fd[1]);
+	ft_putstr_fd(input, write_pipe_fd);
 	free(input);
 }
 
 static void	heredoc_process(t_cmd *node, t_cmd_list *list)
 {
-	register_heredoc_signal_handler(node);
-	get_stdin(node);
-	close_all_fd(NULL, node);
 	handle_hash_leak();
+	register_heredoc_signal_handler(node, list);
+	get_stdin(node->d_in_eof, node->hd_pipe_fd[1]);
+	close_all_fd(NULL, node);
 	ms_terminator(list, 1, 0);
 }
 
-void	handle_heredoc(t_cmd *node, t_cmd_list *list)
+int	handle_heredoc(t_cmd *node, t_cmd_list *list)
 {
 	pid_t	pid;
 	int		heredoc_stat;
@@ -79,7 +75,7 @@ void	handle_heredoc(t_cmd *node, t_cmd_list *list)
 		perror(NULL);
 		ms_terminator(list, 1, errno);
 	}
-	terminal_state(1);
+	terminal_state(MS_STORE_TERMINAL_STATE);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -89,18 +85,7 @@ void	handle_heredoc(t_cmd *node, t_cmd_list *list)
 	else if (pid == 0)
 		heredoc_process(node, list);
 	waitpid(pid, &heredoc_stat, 0);
-	ft_printf("heredoc exit at %d\n", heredoc_stat);
 	close(node->hd_pipe_fd[1]);
 	node->hd_pipe_fd[1] = -1;
-}
-
-void	terminal_state(int store_flag)
-{
-	static struct termios	term_state;
-
-	if (store_flag)
-		tcgetattr(STDIN_FILENO, &term_state);
-	else
-		tcsetattr(STDIN_FILENO, TCSANOW, &term_state);
-
+	return (ms_exit_status(heredoc_stat));
 }
