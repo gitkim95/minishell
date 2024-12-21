@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_logic.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 18:25:09 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 16:45:11 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	execute_logic(t_cmd_list *list)
 	{
 		store_std_fds(std_fds);
 		pipe_connect(list->head, list, 0);
-		execute_bulitin(list->head, list, 0);
+		exec_builtin(list->head->av);
 		restore_std_fds(std_fds);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:37:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 16:36:01 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/21 20:06:07 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 void	close_all_fd(t_cmd_list *list, t_cmd *node);
 
 //ms_execute_cmd.c
-void	execute_bulitin(t_cmd *node, t_cmd_list *list, int flag);
-void	execute_cmd(t_cmd *node, t_cmd_list *list);
+int		execute_cmd(t_cmd *node);
 
 //ms_execute_logic.c
 void	execute_logic(t_cmd_list *list);

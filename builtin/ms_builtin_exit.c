@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/21 18:45:49 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/21 20:58:58 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int	ms_builtin_exit(char **argv)
 		exit_code = 0;
 	else
 		exit_code = ft_atoi(exit_str);
-	ft_printf("exit\n");
-	exit(exit_code);
+	return (exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 16:28:39 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/21 22:17:38 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ int	ms_exit_status(int exit_status)
 {
 	if (WIFEXITED(exit_status))
 		return (WEXITSTATUS(exit_status));
+	else if (WIFSIGNALED(exit_status))
+		return (128 + WTERMSIG(exit_status));
 	return (exit_status);
 }

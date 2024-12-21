@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:03:17 by gitkim            #+#    #+#             */
-/*   Updated: 2024/10/06 00:52:20 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 20:08:51 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	cal_len(long long n)
+static int	cal_len(long long n)
 {
 	int	cnt;
 
@@ -32,7 +32,7 @@ int	cal_len(long long n)
 	return (cnt);
 }
 
-void	fill_arr(long long n, char *arr, int *i)
+static void	fill_arr(long long n, char *arr, int *i)
 {
 	if (n >= 10)
 		fill_arr(n / 10, arr, i);

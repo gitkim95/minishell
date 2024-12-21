@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:49:12 by gitkim            #+#    #+#             */
-/*   Updated: 2024/10/13 17:02:31 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 20:08:54 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	cal_len(long long n)
+static int	cal_len(long long n)
 {
 	int	cnt;
 
@@ -32,7 +32,7 @@ int	cal_len(long long n)
 	return (cnt);
 }
 
-void	fill_arr(long long n, char *arr, int *i)
+static void	fill_arr(long long n, char *arr, int *i)
 {
 	if (n >= 10)
 		fill_arr(n / 10, arr, i);

@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 17:51:32 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/21 22:30:18 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/wait.h>
+#include "ms_env.h"
 #include "ms_execute.h"
 #include "ms_builtin.h"
+#include "ms_signal.h"
 #include "ms_utils.h"
+#include "libft.h"
 
 static void	temp_close_heredoc_fd(t_cmd_list *list)
 {
@@ -43,7 +46,9 @@ static void	temp_close_heredoc_fd(t_cmd_list *list)
 
 static void	parent_process(t_cmd_list *list, pid_t *pid)
 {
-	int	idx;
+	char	*exit_str;
+	int		exit_code;
+	int		idx;
 
 	temp_close_heredoc_fd(list);
 	close_all_fd(list, NULL);
@@ -51,19 +56,26 @@ static void	parent_process(t_cmd_list *list, pid_t *pid)
 	while (idx < list->size)
 	{
 		if (pid[idx] != -2)
-			waitpid(pid[idx], NULL, 0);
+			waitpid(pid[idx], &exit_code, 0);
 		idx++;
 	}
+	exit_str = ft_itoa(ms_exit_status(exit_code));
+	ms_set_env("0", exit_str);
+	free(exit_str);
 	free(pid);
 }
 
 static void	child_process(t_cmd *node, t_cmd_list *list, int idx)
 {
+	int	exit_code;
+
 	pipe_connect(node, list, idx);
 	if (is_builtin(node->av[0]))
-		execute_bulitin(node, list, 1);
+		exit_code = exec_builtin(node->av);
 	else
-		execute_cmd(node, list);
+		exit_code = execute_cmd(node);
+	handle_hash_leak();
+	ms_terminator(list, 1, exit_code);
 }
 
 void	process_loop(t_cmd_list *list, pid_t *pid)
@@ -84,6 +96,8 @@ void	process_loop(t_cmd_list *list, pid_t *pid)
 		else if (pid[idx] == 0)
 		{
 			free(pid);
+			if (idx == 0)
+				unblock_signal();
 			child_process(node, list, idx);
 		}
 		idx++;
