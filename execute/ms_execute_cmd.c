@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:13:38 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/20 20:25:55 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/21 18:44:03 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	execute_cmd(t_cmd *node, t_cmd_list *list)
 	unblock_signal();
 	if (!node->av[0] || execve(node->av[0], node->av, envp) == -1)
 	{
-		if (node->av[0])
+		if (node->av[0] && *(node->av[0]))
 			perror(node->av[0]);
 		free_split(envp);
 		handle_hash_leak();
