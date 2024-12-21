@@ -6,28 +6,36 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:47:55 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/15 18:20:35 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/21 16:43:18 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <readline/readline.h>
+#include <unistd.h>
 #include <signal.h>
+#include "ms_struct.h"
+#include "ms_execute.h"
 #include "ms_message.h"
 #include "ms_signal.h"
 #include "libft.h"
 
-static void	readline_signal_handler(int sig);
+static void		readline_signal_handler(int sig);
 
-void	register_signal_hander(void)
+void	register_signal_handler(void)
 {
 	rl_catch_signals = 0;
 	signal(SIGINT, readline_signal_handler);
 	signal(SIGQUIT, readline_signal_handler);
 }
 
-void	reset_signal_hander(void)
+void	block_signal(void)
 {
-	rl_catch_signals = 1;
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	unblock_signal(void)
+{
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_close_fd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:57:47 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/16 12:03:32 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 17:34:19 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	free_pipe(t_cmd_list *list)
 {
 	int	idx;
 
+	if (!list)
+		return ;
 	if (!list->pipe_fd)
 		return ;
 	idx = 0;
@@ -35,6 +37,8 @@ static void	close_pipe_fd(t_cmd_list *list)
 {
 	int	i;
 
+	if (!list)
+		return ;
 	i = 0;
 	while (i < list->size - 1)
 	{
@@ -56,6 +60,8 @@ static void	close_io_fd(t_cmd_list *list)
 {
 	t_cmd	*node;
 
+	if (!list)
+		return ;
 	node = list->head;
 	while (node)
 	{
