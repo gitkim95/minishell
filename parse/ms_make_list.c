@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/20 02:05:33 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/20 18:09:37 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "ms_utils.h"
 #include "libft.h"
 
-static t_cmd	*make_new_node(char *cmd_str, char **path)
+static t_cmd	*make_new_node(char **cmd_str, char **path)
 {
 	char	**cmd_split;
 	t_cmd	*new_node;
@@ -26,11 +26,11 @@ static t_cmd	*make_new_node(char *cmd_str, char **path)
 	if (!new_node)
 		exit(ENOMEM);
 	set_cmd_struct_zero(new_node);
-	output_redirection_sign(cmd_str, new_node);
-	input_redirection_sign(cmd_str, new_node);
-	set_isspace_to_blank(cmd_str);
-	handle_env_sign(&cmd_str);
-	cmd_split = append_cmd_options(cmd_str);
+	output_redirection_sign(*cmd_str, new_node);
+	input_redirection_sign(*cmd_str, new_node);
+	set_isspace_to_blank(*cmd_str);
+	handle_env_sign(cmd_str);
+	cmd_split = append_cmd_options(*cmd_str);
 	if (!cmd_split)
 		exit(ENOMEM);
 	if (!is_builtin(cmd_split[0]))
@@ -68,7 +68,7 @@ void	make_list(t_cmd_list *list, char **cmd_split)
 	set_list_struct_zero(list);
 	while (cmd_split[i])
 	{
-		node = make_new_node(cmd_split[i], path);
+		node = make_new_node(&cmd_split[i], path);
 		if (!node)
 			exit(ENOMEM);
 		list_add_back(list, node);
