@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:47:55 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/21 22:29:56 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:19:15 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <unistd.h>
 #include <signal.h>
 #include "ms_struct.h"
+#include "ms_env.h"
 #include "ms_execute.h"
-#include "ms_message.h"
 #include "ms_signal.h"
 #include "libft.h"
 
@@ -47,7 +47,8 @@ static void	readline_signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_printf("\n");
+		ms_set_env(MS_EXIT_CODE_KEY, "130");
+		ft_printf("^C\n");
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		rl_redisplay();

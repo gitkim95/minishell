@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 20:12:01 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:15:51 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,13 @@
 #include "ms_utils.h"
 #include "libft.h"
 
-static void	temp_close_heredoc_fd(t_cmd_list *list)
-{
-	t_cmd	*node;
-
-	if (!list)
-		return ;
-	node = list->head;
-	while (node)
-	{
-		if (node->hd_pipe_fd[0] != -1)
-		{
-			close(node->hd_pipe_fd[0]);
-			node->hd_pipe_fd[0] = -1;
-		}
-		if (node->hd_pipe_fd[1] != -1)
-		{
-			close(node->hd_pipe_fd[1]);
-			node->hd_pipe_fd[1] = -1;
-		}
-		node = node->next;
-	}
-}
-
 static int	parent_process(t_cmd_list *list, pid_t *pid)
 {
 	int		exit_code;
 	int		idx;
 
 	exit_code = ft_atoi(ms_get_env(MS_EXIT_CODE_KEY));
-	temp_close_heredoc_fd(list);
+	close_all_heredoc_fd(list);
 	close_all_fd(list, NULL);
 	idx = 0;
 	while (idx < list->size)
