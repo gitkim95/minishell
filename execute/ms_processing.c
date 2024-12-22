@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_processing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 17:05:48 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 20:12:01 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	parent_process(t_cmd_list *list, pid_t *pid)
 	int		exit_code;
 	int		idx;
 
+	exit_code = ft_atoi(ms_get_env(MS_EXIT_CODE_KEY));
 	temp_close_heredoc_fd(list);
 	close_all_fd(list, NULL);
 	idx = 0;

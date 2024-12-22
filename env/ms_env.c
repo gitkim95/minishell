@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 21:01:23 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/22 16:21:40 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:36:56 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	set_env_state(char *envp[])
 		put_hash_value(*env_hash, *envp, delimiter + 1);
 		++envp;
 	}
-	put_hash_value(*env_hash, "?", "0");
+	put_hash_value(*env_hash, MS_EXIT_CODE_KEY, "0");
 }
 
 static t_hash	**get_env_state(void)
@@ -83,13 +83,16 @@ static int	append_node_to_array(t_hash_node *env_node, char **str_arr)
 	env_count = 0;
 	while (env_node)
 	{
-		env_len = ft_strlen(env_node->key) + ft_strlen(env_node->s_value) + 2;
-		env_str = (char *)ft_calloc(env_len, sizeof(char *));
-		ft_strcat(env_str, env_node->key);
-		ft_strcat(env_str, "=");
-		ft_strcat(env_str, env_node->s_value);
-		*(str_arr + env_count) = env_str;
-		++env_count;
+		if (ft_strcmp(env_node->key, MS_EXIT_CODE_KEY) != 0)
+		{
+			env_len = ft_strlen(env_node->key) + ft_strlen(env_node->s_value) + 2;
+			env_str = (char *)ft_calloc(env_len, sizeof(char *));
+			ft_strcat(env_str, env_node->key);
+			ft_strcat(env_str, "=");
+			ft_strcat(env_str, env_node->s_value);
+			*(str_arr + env_count) = env_str;
+			++env_count;
+		}
 		env_node = env_node->next;
 	}
 	return (env_count);

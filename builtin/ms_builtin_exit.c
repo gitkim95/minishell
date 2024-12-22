@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/22 16:26:20 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:55:35 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ms_builtin_exit(char **argv)
 
 	exit_str = argv[1];
 	if (!exit_str)
-		exit_code = ft_atoi(ms_get_env("$?"));
+		exit_code = ft_atoi(ms_get_env(MS_EXIT_CODE_KEY));
 	else
 		exit_code = ft_atoi(exit_str);
 	ms_exit(MS_EXIT_SET);
