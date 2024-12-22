@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 21:03:13 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/15 20:06:49 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:37:06 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MS_ENV_H
 
 # include "ft_hash.h"
+
+# define MS_EXIT_CODE_KEY "?"
 
 /* ms_env */
 t_hash	*get_env_hash(void);

@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:59:03 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:37:03 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	set_exit_code(int exit_code)
 	char	*exit_str;
 
 	exit_str = ft_itoa(exit_code);
-	ms_set_env("?", exit_str);
+	ms_set_env(MS_EXIT_CODE_KEY, exit_str);
 	free(exit_str);
 }
 

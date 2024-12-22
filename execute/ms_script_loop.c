@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:55:02 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:29:35 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 19:49:52 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ void	script_loop(t_cmd_list *list)
 	{
 		register_signal_handler();
 		input = readline("$ ");
-		add_history(input);
-		if (input)
-		{
-			block_signal();
-			init_struct(input, list);
-			free(input);
-			execute_logic(list);
-		}
-		else
+		if (!input)
 		{
 			ft_printf("\n");
 			break ;
 		}
+		else if (*input)
+		{
+			block_signal();
+			add_history(input);
+			init_struct(input, list);
+			execute_logic(list);
+		}
+		free(input);
 	}
 	ft_printf("exit\n");
 }
