@@ -6,21 +6,22 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/13 17:01:59 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 22:46:51 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtin.h"
 #include "ms_env.h"
 
-/* todo: multi arg input */
 int	ms_builtin_unset(char **argv)
 {
-	char	*env;
+	int	i;
 
-	env = argv[1];
-	if (!env)
-		return (0);
-	ms_del_env(env);
+	i = 1;
+	while (argv[i])
+	{
+		ms_del_env(argv[i]);
+		++i;
+	}
 	return (0);
 }
