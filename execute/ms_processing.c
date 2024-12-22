@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 22:30:18 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 16:03:35 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ void	process_loop(t_cmd_list *list, pid_t *pid)
 		else if (pid[idx] == 0)
 		{
 			free(pid);
-			if (idx == 0)
-				unblock_signal();
+			unblock_signal();
 			child_process(node, list, idx);
 		}
 		idx++;

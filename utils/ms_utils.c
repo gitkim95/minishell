@@ -6,11 +6,12 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 22:17:38 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 15:53:45 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/wait.h>
+#include <unistd.h>
 #include "ms_utils.h"
 
 char	*ft_strcat(char *dest, const char *src)
@@ -62,6 +63,9 @@ int	ms_exit_status(int exit_status)
 	if (WIFEXITED(exit_status))
 		return (WEXITSTATUS(exit_status));
 	else if (WIFSIGNALED(exit_status))
+	{
+		write(STDOUT_FILENO, "\n", 1);
 		return (128 + WTERMSIG(exit_status));
+	}
 	return (exit_status);
 }
