@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 01:30:56 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 22:11:02 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 22:58:27 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static char	*fit_ifs(char *env_value)
 	int		idx;
 
 	ifs_env = ft_strdup(env_value);
+	if (!ifs_env)
+		return (NULL);
 	ifs_value = ms_get_env(MS_IFS_KEY);
 	idx = 0;
 	while (ifs_env[idx])
@@ -71,7 +73,7 @@ void	handle_env_sign(char **cmd_str)
 		if ((*cmd_str)[idx] == '\'')
 		{
 			while ((*cmd_str)[++idx] != '\'' && (*cmd_str)[idx])
-				idx++;
+				continue ;
 		}
 		else if ((*cmd_str)[idx] == '$')
 		{

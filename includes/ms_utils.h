@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:55 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 21:14:42 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 22:26:20 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		ms_exit(int flag);
 
 //ms_utils.c
 char	*ft_strcat(char *dest, const char *src);
+int		ft_isempty(char *str);
 int		ft_isspace(char c);
 int		ft_strcmp(char *s1, char *s2);
 

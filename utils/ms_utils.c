@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:14:01 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 22:26:07 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ char	*ft_strcat(char *dest, const char *src)
 	}
 	dest[i + j] = '\0';
 	return (dest);
+}
+
+int ft_isempty(char *str)
+{
+	int	idx;
+
+	idx = 0;
+	while (str[idx])
+	{
+		if (str[idx] != ' ')
+			return (0);
+		idx++;
+	}
+	return (1);
 }
 
 int	ft_isspace(char c)
