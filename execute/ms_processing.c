@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 21:15:51 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:51:09 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static int	parent_process(t_cmd_list *list, pid_t *pid)
 	int		idx;
 
 	exit_code = ft_atoi(ms_get_env(MS_EXIT_CODE_KEY));
-	close_all_heredoc_fd(list);
-	close_all_fd(list, NULL);
+	close_all_fd(list);
 	idx = 0;
 	while (idx < list->size)
 	{

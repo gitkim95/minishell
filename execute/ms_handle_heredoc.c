@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:15:16 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 21:41:43 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:51:00 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ static void	heredoc_process(t_cmd *node, t_cmd_list *list)
 	register_heredoc_signal_handler(list);
 	get_stdin(node->d_in_eof, node->hd_pipe_fd[1], node->heredoc_quote_flag);
 	handle_hash_leak();
-	close_all_heredoc_fd(list);
-	close_all_fd(list, NULL);
+	close_all_fd(list);
 	ms_terminator(list, 1, 0);
 }
 

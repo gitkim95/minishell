@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:55:02 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 21:26:29 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:51:30 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ static void	run_input(char *input, t_cmd_list *list)
 
 	exit_code = init_struct(input, list);
 	if (exit_code)
-	{
-		close_all_heredoc_fd(list);
-		close_all_fd(list, NULL);
-	}
+		close_all_fd(list);
 	else
 		exit_code = execute_logic(list);
 	set_exit_code(exit_code);

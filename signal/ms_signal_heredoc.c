@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:47:55 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/22 21:32:40 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:52:01 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ static void	heredoc_signal_handler(int sig)
 	if (sig == SIGINT)
 	{
 		ft_printf("^C\n");
-		close_all_heredoc_fd(list);
-		close_all_fd(list, NULL);
+		close_all_fd(list);
 		terminal_state(MS_RESTORE_TERMINAL_STATE);
 		handle_hash_leak();
 		ms_terminator(list, 1, 128 + SIGINT);
