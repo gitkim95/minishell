@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 21:01:23 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/22 20:16:21 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 22:02:28 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	set_env_state(char *envp[])
 		++envp;
 	}
 	put_hash_value(*env_hash, MS_EXIT_CODE_KEY, "0");
+	put_hash_value(*env_hash, MS_IFS_KEY, " \t\n");
 }
 
 static t_hash	**get_env_state(void)
