@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:56:36 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/20 18:09:37 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 18:39:32 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,23 @@
 #include "ms_builtin.h"
 #include "ms_utils.h"
 #include "libft.h"
+
+static void	delete_front_blank(char **cmd)
+{
+	int		idx;
+	char	*temp;
+
+	idx = 0;
+	while ((*cmd)[idx])
+	{
+		if ((*cmd)[idx] != ' ')
+			break ;
+		idx++;
+	}
+	temp = *cmd;
+	*cmd = ft_strdup(temp + idx);
+	free(temp);
+}
 
 static t_cmd	*make_new_node(char **cmd_str, char **path)
 {
@@ -30,10 +47,11 @@ static t_cmd	*make_new_node(char **cmd_str, char **path)
 	input_redirection_sign(*cmd_str, new_node);
 	set_isspace_to_blank(*cmd_str);
 	handle_env_sign(cmd_str);
+	delete_front_blank(cmd_str);
 	cmd_split = append_cmd_options(*cmd_str);
 	if (!cmd_split)
 		exit(ENOMEM);
-	if (!is_builtin(cmd_split[0]))
+	if (!is_builtin(cmd_split[0]) && **cmd_str != '\0')
 		cmd_split[0] = parse_cmd_path(cmd_split[0], path);
 	if (!cmd_split)
 		exit(ENOMEM);

@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:30:07 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/15 17:44:31 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 21:05:59 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@ char	*get_redirection_target(char *cmd_str)
 		exit(ENOMEM);
 	i = 0;
 	while (temp[i] && temp[i] != ' ')
-		i++;
+	{
+		if (temp[i] == '\'')
+			skip_quote(temp, &i, '\'');
+		else if (temp[i] == '\"')
+			skip_quote(temp, &i, '\"');
+		else
+			i++;
+	}
 	target = ft_substr(temp, 0, i);
 	if (!target)
 		exit(ENOMEM);

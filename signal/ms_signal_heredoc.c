@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_signal_heredoc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:47:55 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/21 17:38:45 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 16:40:55 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	heredoc_signal_handler(int sig)
 		close(node->hd_pipe_fd[0]);
 		close(node->hd_pipe_fd[1]);
 		terminal_state(MS_RESTORE_TERMINAL_STATE);
+		handle_hash_leak();
 		ms_terminator(list, 1, 128 + SIGINT);
 		exit(128 + SIGINT);
 	}

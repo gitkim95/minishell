@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_logic.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 17:48:18 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/21 18:25:09 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ void	execute_logic(t_cmd_list *list)
 	pid_t	*pid;
 	int		std_fds[3];
 
-	alloc_pipe_fd(list);
-	init_pipe_fd(list);
+	if (list->size > 1)
+	{
+		alloc_pipe_fd(list);
+		init_pipe_fd(list);
+	}
 	if (list->size == 1 && is_builtin(list->head->av[0]))
 	{
 		store_std_fds(std_fds);

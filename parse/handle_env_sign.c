@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 01:30:56 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 02:09:22 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/21 19:56:47 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ static char	*change_to_env(char *cmd_str, int *idx, int key_idx)
 	char	*following_str;
 	char	*temp;
 
+	if (key_idx == *idx)
+		key_idx++;
 	env_key = ft_substr(cmd_str, *idx, key_idx - *idx);
 	env_value = ms_get_env(env_key);
-	following_str = ft_substr(cmd_str, key_idx, ft_strlen(cmd_str) - key_idx);
+	following_str = ft_substr(cmd_str, key_idx, ft_strlen(cmd_str));
 	cmd_str[*idx - 1] = '\0';
 	temp = ft_strjoin(cmd_str, env_value);
 	*idx = ft_strlen(temp);
@@ -38,8 +40,8 @@ static char	*change_to_env(char *cmd_str, int *idx, int key_idx)
 
 void	handle_env_sign(char **cmd_str)
 {
-	int		idx;
-	int		key_idx;
+	int	idx;
+	int	key_idx;
 
 	idx = 0;
 	while ((*cmd_str)[idx])
@@ -51,16 +53,37 @@ void	handle_env_sign(char **cmd_str)
 		}
 		else if ((*cmd_str)[idx] == '$')
 		{
-			if ((*cmd_str)[++idx] != ' ' || (*cmd_str)[idx])
+			if (ft_isalnum((*cmd_str)[++idx]) || (*cmd_str)[idx] == '?')
 			{
 				key_idx = idx;
-				while ((*cmd_str)[key_idx] != ' ' && (*cmd_str)[key_idx] && \
-					(*cmd_str)[key_idx] != '\'' && (*cmd_str)[key_idx] != '\"')
+				while (ft_isalnum((*cmd_str)[key_idx]))
 					key_idx++;
 				*cmd_str = change_to_env(*cmd_str, &idx, key_idx);
 			}
 		}
 		else
 			idx++;
+	}
+}
+
+void	handle_heredoc_env_sign(char **input)
+{
+	int	idx;
+	int	key_idx;
+
+	idx = 0;
+	while ((*input)[idx])
+	{
+		if ((*input)[idx] == '$')
+		{
+			if (ft_isalnum((*input)[++idx]) || (*input)[idx] == '?')
+			{
+				key_idx = idx;
+				while (ft_isalnum((*input)[key_idx]))
+					key_idx++;
+				*input = change_to_env(*input, &idx, key_idx);
+			}
+		}
+		idx++;
 	}
 }
