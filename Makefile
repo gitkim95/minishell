@@ -31,8 +31,7 @@ HASH_SRC	=	ft_hash.c	ft_hash_utils.c
 HASH_OBJ	=	$(addprefix $(OBJS_DIR)/, $(HASH_SRC:.c=.o))
 
 UTILS_DIR	=	./utils
-UTILS_SRC	=	ms_utils.c	\
-				ms_mem_free.c
+UTILS_SRC	=	ms_utils.c	ms_utils_exit.c	ms_mem_free.c
 UTILS_OBJ	=	$(addprefix $(OBJS_DIR)/, $(UTILS_SRC:.c=.o))
 
 EXEC_DIR	=	./execute

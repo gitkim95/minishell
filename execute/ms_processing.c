@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:03:35 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 16:24:53 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	parent_process(t_cmd_list *list, pid_t *pid)
 		idx++;
 	}
 	exit_str = ft_itoa(ms_exit_status(exit_code));
-	ms_set_env("0", exit_str);
+	ms_set_env("?", exit_str);
 	free(exit_str);
 	free(pid);
 }
