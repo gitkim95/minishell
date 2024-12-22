@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:15:16 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:38:12 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 19:56:11 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	heredoc_process(t_cmd *node, t_cmd_list *list)
 	register_heredoc_signal_handler(node, list);
 	get_stdin(node->d_in_eof, node->hd_pipe_fd[1], node->heredoc_quote_flag);
 	handle_hash_leak();
-	close_all_fd(NULL, node);
+	close_all_fd(list, node);
 	ms_terminator(list, 1, 0);
 }
 

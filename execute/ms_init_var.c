@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:16:59 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/17 20:44:43 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 17:13:04 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	init_pipe_fd(t_cmd_list *list)
 pid_t	*init_pid_arr(t_cmd_list *list)
 {
 	pid_t	*pid;
+	int		idx;
 
 	pid = (pid_t *)malloc(sizeof(pid_t) * list->size);
 	if (!pid)
@@ -68,6 +69,11 @@ pid_t	*init_pid_arr(t_cmd_list *list)
 		perror(NULL);
 		ms_terminator(list, 1, errno);
 	}
-	ft_memset(pid, -2, sizeof(pid_t) * list->size);
+	idx = 0;
+	while (idx < list->size)
+	{
+		pid[idx] = PID_INIT;
+		idx++;
+	}
 	return (pid);
 }
