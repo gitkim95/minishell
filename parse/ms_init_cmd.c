@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:49 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 20:50:46 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 23:14:49 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	init_struct(char *str, t_cmd_list *list)
 {
 	char	**temp;
 
-	temp = ft_split(str, '|');
+	temp = seperate_by_pipe(str);
 	if (!temp)
 		exit(ENOMEM);
 	make_list(list, temp);
