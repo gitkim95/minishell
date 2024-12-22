@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:24:53 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 16:56:32 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ static void	temp_close_heredoc_fd(t_cmd_list *list)
 	}
 }
 
-static void	parent_process(t_cmd_list *list, pid_t *pid)
+static int	parent_process(t_cmd_list *list, pid_t *pid)
 {
-	char	*exit_str;
 	int		exit_code;
 	int		idx;
 
@@ -59,10 +58,8 @@ static void	parent_process(t_cmd_list *list, pid_t *pid)
 			waitpid(pid[idx], &exit_code, 0);
 		idx++;
 	}
-	exit_str = ft_itoa(ms_exit_status(exit_code));
-	ms_set_env("?", exit_str);
-	free(exit_str);
 	free(pid);
+	return (ms_exit_status(exit_code));
 }
 
 static void	child_process(t_cmd *node, t_cmd_list *list, int idx)
@@ -78,7 +75,7 @@ static void	child_process(t_cmd *node, t_cmd_list *list, int idx)
 	ms_terminator(list, 1, exit_code);
 }
 
-void	process_loop(t_cmd_list *list, pid_t *pid)
+int	process_loop(t_cmd_list *list, pid_t *pid)
 {
 	t_cmd	*node;
 	int		idx;
@@ -102,5 +99,5 @@ void	process_loop(t_cmd_list *list, pid_t *pid)
 		idx++;
 		node = node->next;
 	}
-	parent_process(list, pid);
+	return (parent_process(list, pid));
 }

@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:37:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 20:06:07 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 16:56:42 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_pipe_fd(t_cmd_list *list);
 pid_t	*init_pid_arr(t_cmd_list *list);
 
 //ms_processing.c
-void	process_loop(t_cmd_list *list, pid_t *pid);
+int		process_loop(t_cmd_list *list, pid_t *pid);
 
 //ms_script_loop.c
 void	script_loop(t_cmd_list *list);
