@@ -19,7 +19,7 @@ SOURCES_OBJ =	$(addprefix $(OBJS_DIR)/, $(SOURCES:.c=.o))
 BUILTIN_DIR	=	./builtin
 BUILTIN_SRC =	ms_builtin_cd.c		ms_builtin_echo.c	ms_builtin_env.c	\
 				ms_builtin_export.c	ms_builtin_pwd.c	ms_builtin_unset.c	\
-				ms_builtin.c
+				ms_builtin_exit.c	ms_builtin.c
 BUILTIN_OBJ	=	$(addprefix $(OBJS_DIR)/, $(BUILTIN_SRC:.c=.o))
 
 ENV_DIR 	=	./env
@@ -31,8 +31,7 @@ HASH_SRC	=	ft_hash.c	ft_hash_utils.c
 HASH_OBJ	=	$(addprefix $(OBJS_DIR)/, $(HASH_SRC:.c=.o))
 
 UTILS_DIR	=	./utils
-UTILS_SRC	=	ms_utils.c	\
-				ms_mem_free.c
+UTILS_SRC	=	ms_utils.c	ms_utils_exit.c	ms_mem_free.c
 UTILS_OBJ	=	$(addprefix $(OBJS_DIR)/, $(UTILS_SRC:.c=.o))
 
 EXEC_DIR	=	./execute

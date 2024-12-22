@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_utils_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:29:12 by hwilkim          ###   ########.fr       */
+/*   Created: 2024/12/22 16:13:32 by hwilkim           #+#    #+#             */
+/*   Updated: 2024/12/22 16:22:43 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "ms_execute.h"
-#include "ms_env.h"
+#include <sys/wait.h>
+#include <unistd.h>
 #include "ms_utils.h"
-#include "libft.h"
 
-int	main(int argc, char **argv, char **envp)
+int	ms_exit_status(int exit_status)
 {
-	t_cmd_list	list;
-	int			exit_code;
+	if (WIFEXITED(exit_status))
+		return (WEXITSTATUS(exit_status));
+	else if (WIFSIGNALED(exit_status))
+	{
+		write(STDOUT_FILENO, "\n", 1);
+		return (128 + WTERMSIG(exit_status));
+	}
+	return (exit_status);
+}
 
-	(void) argc;
-	(void) argv;
-	set_env_state(envp);
-	script_loop(&list);
-	exit_code = ft_atoi(ms_get_env("$?"));
-	handle_hash_leak();
-	return (exit_code);
+int	ms_exit(int flag)
+{
+	static int	exit_flag = 1;
+
+	if (flag)
+		exit_flag = 0;
+	return (exit_flag);
 }

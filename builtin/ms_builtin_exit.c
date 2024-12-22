@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_builtin_exit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 16:12:21 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:29:12 by hwilkim          ###   ########.fr       */
+/*   Created: 2024/12/12 18:43:14 by hwilkim           #+#    #+#             */
+/*   Updated: 2024/12/22 16:26:20 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "ms_execute.h"
+#include "ms_builtin.h"
 #include "ms_env.h"
 #include "ms_utils.h"
 #include "libft.h"
 
-int	main(int argc, char **argv, char **envp)
+int	ms_builtin_exit(char **argv)
 {
-	t_cmd_list	list;
-	int			exit_code;
+	char	*exit_str;
+	int		exit_code;
 
-	(void) argc;
-	(void) argv;
-	set_env_state(envp);
-	script_loop(&list);
-	exit_code = ft_atoi(ms_get_env("$?"));
-	handle_hash_leak();
+	exit_str = argv[1];
+	if (!exit_str)
+		exit_code = ft_atoi(ms_get_env("$?"));
+	else
+		exit_code = ft_atoi(exit_str);
+	ms_exit(MS_EXIT_SET);
 	return (exit_code);
 }

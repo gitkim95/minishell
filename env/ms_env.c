@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 21:01:23 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/15 20:06:43 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 16:21:40 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	set_env_state(char *envp[])
 		put_hash_value(*env_hash, *envp, delimiter + 1);
 		++envp;
 	}
+	put_hash_value(*env_hash, "?", "0");
 }
 
 static t_hash	**get_env_state(void)
