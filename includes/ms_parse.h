@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:05:58 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 22:10:20 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 20:49:20 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	delete_quotes(char **option, int *flag);
 void	set_isspace_to_blank(char *cmd);
 void	set_list_struct_zero(t_cmd_list *list);
 void	set_cmd_struct_zero(t_cmd *cmd);
-void	init_struct(char *str, t_cmd_list *list);
+int		init_struct(char *str, t_cmd_list *list);
 
 //ms_make_list.c
 void	make_list(t_cmd_list *list, char **cmd_split);

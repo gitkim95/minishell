@@ -6,13 +6,12 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:36:54 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 19:37:03 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:09:50 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ms_builtin.h"
-#include "ms_env.h"
 #include "ms_execute.h"
 #include "ms_utils.h"
 #include "libft.h"
@@ -34,16 +33,7 @@ static void	store_std_fds(int *std_fds)
 	std_fds[2] = dup(STDERR_FILENO);
 }
 
-static void	set_exit_code(int exit_code)
-{
-	char	*exit_str;
-
-	exit_str = ft_itoa(exit_code);
-	ms_set_env(MS_EXIT_CODE_KEY, exit_str);
-	free(exit_str);
-}
-
-void	execute_logic(t_cmd_list *list)
+int	execute_logic(t_cmd_list *list)
 {
 	pid_t	*pid;
 	int		std_fds[3];
@@ -66,6 +56,5 @@ void	execute_logic(t_cmd_list *list)
 		pid = init_pid_arr(list);
 		exit_code = process_loop(list, pid);
 	}
-	set_exit_code(exit_code);
-	ms_terminator(list, 0, 0);
+	return (exit_code);
 }

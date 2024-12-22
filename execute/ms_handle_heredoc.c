@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_heredoc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:15:16 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 19:56:11 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 21:41:43 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,10 @@
 #include "ms_parse.h"
 #include "libft.h"
 
-static char	*append_input(char *prev, char *new)
-{
-	char	*input;
-
-	input = ft_calloc(ft_strlen(prev) + ft_strlen(new) + 2, sizeof(char));
-	if (!input)
-		return (NULL);
-	ft_strcat(input, prev);
-	ft_strcat(input, new);
-	ft_strcat(input, "\n");
-	free(prev);
-	free(new);
-	return (input);
-}
-
 static void	get_stdin(char *eof, int write_pipe_fd, int flag)
 {
-	char	*input;
 	char	*line;
 
-	input = ft_strdup("");
 	while (1)
 	{
 		line = readline("> ");
@@ -49,22 +32,24 @@ static void	get_stdin(char *eof, int write_pipe_fd, int flag)
 			break ;
 		}
 		if (!ft_strcmp(line, eof))
+		{
+			free(line);
 			break ;
+		}
 		if (!flag)
 			handle_heredoc_env_sign(&line);
-		input = append_input(input, line);
+		ft_putendl_fd(line, write_pipe_fd);
+		free(line);
 	}
-	free(line);
-	ft_putstr_fd(input, write_pipe_fd);
-	free(input);
 }
 
 static void	heredoc_process(t_cmd *node, t_cmd_list *list)
 {
-	register_heredoc_signal_handler(node, list);
+	register_heredoc_signal_handler(list);
 	get_stdin(node->d_in_eof, node->hd_pipe_fd[1], node->heredoc_quote_flag);
 	handle_hash_leak();
-	close_all_fd(list, node);
+	close_all_heredoc_fd(list);
+	close_all_fd(list, NULL);
 	ms_terminator(list, 1, 0);
 }
 

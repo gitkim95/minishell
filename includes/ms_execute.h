@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:37:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:56:42 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:15:33 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 
 //ms_close_fd.c
 void	close_all_fd(t_cmd_list *list, t_cmd *node);
+void	close_all_heredoc_fd(t_cmd_list *list);
 
 //ms_execute_cmd.c
 int		execute_cmd(t_cmd *node);
 
 //ms_execute_logic.c
-void	execute_logic(t_cmd_list *list);
+int		execute_logic(t_cmd_list *list);
 
 //ms_handle_heredoc.c
 int		handle_heredoc(t_cmd *node, t_cmd_list *list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_mem_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:52:34 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/17 21:13:08 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 21:14:12 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,25 @@ void	handle_hash_leak(void)
 {
 	free_hash(get_env_hash());
 	free_hash(get_builtin_hash());
+}
+
+void	free_pipe(t_cmd_list *list)
+{
+	int	idx;
+
+	if (!list)
+		return ;
+	if (!list->pipe_fd)
+		return ;
+	idx = 0;
+	while (idx < list->size - 1)
+	{
+		free(list->pipe_fd[idx]);
+		list->pipe_fd[idx] = NULL;
+		idx++;
+	}
+	free(list->pipe_fd);
+	list->pipe_fd = NULL;
 }
 
 void	free_split(char **split)

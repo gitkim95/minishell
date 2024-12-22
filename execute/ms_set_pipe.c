@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:55:14 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/20 20:44:54 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:27:00 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,7 @@ static void	set_input_descriptor(t_cmd *node, t_cmd_list *list, int idx)
 			dup2(node->hd_pipe_fd[0], STDIN_FILENO);
 	}
 	else if (node->prev)
-	{
-		if (node->prev->s_out_fd != -1 || node->d_out_fd != -1)
-			return ;
-		else
-			dup2(list->pipe_fd[idx - 1][0], STDIN_FILENO);
-	}
+		dup2(list->pipe_fd[idx - 1][0], STDIN_FILENO);
 	else
 		return ;
 }
@@ -52,5 +47,6 @@ void	pipe_connect(t_cmd *node, t_cmd_list *list, int idx)
 {
 	set_input_descriptor(node, list, idx);
 	set_output_descriptor(node, list, idx);
-	close_all_fd(list, node);
+	close_all_heredoc_fd(list);
+	close_all_fd(list, NULL);
 }

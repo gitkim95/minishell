@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_signal_heredoc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:47:55 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/22 17:57:13 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 21:32:40 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@
 #include "libft.h"
 
 static void			heredoc_signal_handler(int sig);
-static t_cmd		*heredoc_node(t_cmd *node);
 static t_cmd_list	*heredoc_list(t_cmd_list *list);
 
-void	register_heredoc_signal_handler(t_cmd *node, t_cmd_list *list)
+void	register_heredoc_signal_handler(t_cmd_list *list)
 {
-	heredoc_node(node);
 	heredoc_list(list);
 	signal(SIGINT, heredoc_signal_handler);
 }
@@ -42,27 +40,18 @@ void	terminal_state(int store_flag)
 
 static void	heredoc_signal_handler(int sig)
 {
-	t_cmd		*node;
 	t_cmd_list	*list;
 
-	node = heredoc_node(NULL);
 	list = heredoc_list(NULL);
 	if (sig == SIGINT)
 	{
-		close_all_fd(list, node);
+		ft_printf("^C\n");
+		close_all_heredoc_fd(list);
+		close_all_fd(list, NULL);
 		terminal_state(MS_RESTORE_TERMINAL_STATE);
 		handle_hash_leak();
 		ms_terminator(list, 1, 128 + SIGINT);
 	}
-}
-
-static t_cmd	*heredoc_node(t_cmd *node)
-{
-	static t_cmd	*heredoc_node;
-
-	if (node)
-		heredoc_node = node;
-	return (heredoc_node);
 }
 
 static t_cmd_list	*heredoc_list(t_cmd_list *list)

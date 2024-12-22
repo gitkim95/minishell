@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:46:59 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/21 17:26:59 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:31:39 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define MS_RESTORE_TERMINAL_STATE	0
 
 /* ms_signal_heredoc */
-void	register_heredoc_signal_handler(t_cmd *node, t_cmd_list *list);
+void	register_heredoc_signal_handler(t_cmd_list *list);
 void	terminal_state(int store_flag);
 
 /* ms_signal */

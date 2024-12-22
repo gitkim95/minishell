@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:55 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:16:50 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:14:42 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_strcmp(char *s1, char *s2);
 
 //ms_mem_free.c
 void	handle_hash_leak(void);
+void	free_pipe(t_cmd_list *list);
 void	free_split(char **split);
 void	clear_ms_list(t_cmd_list *list);
 void	ms_terminator(t_cmd_list *list, int exit_flag, int exit_code);

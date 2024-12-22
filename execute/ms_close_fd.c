@@ -3,35 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ms_close_fd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:57:47 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 20:04:37 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 21:16:18 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "ms_utils.h"
 #include "ms_execute.h"
-
-static void	free_pipe(t_cmd_list *list)
-{
-	int	idx;
-
-	if (!list)
-		return ;
-	if (!list->pipe_fd)
-		return ;
-	idx = 0;
-	while (idx < list->size - 1)
-	{
-		free(list->pipe_fd[idx]);
-		list->pipe_fd[idx] = NULL;
-		idx++;
-	}
-	free(list->pipe_fd);
-	list->pipe_fd = NULL;
-}
 
 static void	close_pipe_fd(t_cmd_list *list)
 {
@@ -107,5 +89,28 @@ void	close_all_fd(t_cmd_list *list, t_cmd *node)
 	{
 		close_pipe_fd(list);
 		free_pipe(list);
+	}
+}
+
+void	close_all_heredoc_fd(t_cmd_list *list)
+{
+	t_cmd	*node;
+
+	if (!list)
+		return ;
+	node = list->head;
+	while (node)
+	{
+		if (node->hd_pipe_fd[0] != -1)
+		{
+			close(node->hd_pipe_fd[0]);
+			node->hd_pipe_fd[0] = -1;
+		}
+		if (node->hd_pipe_fd[1] != -1)
+		{
+			close(node->hd_pipe_fd[1]);
+			node->hd_pipe_fd[1] = -1;
+		}
+		node = node->next;
 	}
 }
