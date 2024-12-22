@@ -6,7 +6,7 @@
 /*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 21:01:23 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/22 19:36:56 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 20:16:21 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ static int	append_node_to_array(t_hash_node *env_node, char **str_arr)
 	{
 		if (ft_strcmp(env_node->key, MS_EXIT_CODE_KEY) != 0)
 		{
-			env_len = ft_strlen(env_node->key) + ft_strlen(env_node->s_value) + 2;
-			env_str = (char *)ft_calloc(env_len, sizeof(char *));
+			env_len = ft_strlen(env_node->key) + ft_strlen(env_node->s_value);
+			env_str = (char *)ft_calloc(env_len + 2, sizeof(char *));
 			ft_strcat(env_str, env_node->key);
 			ft_strcat(env_str, "=");
 			ft_strcat(env_str, env_node->s_value);
