@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_processing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:37:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:56:32 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 17:05:48 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	parent_process(t_cmd_list *list, pid_t *pid)
 	idx = 0;
 	while (idx < list->size)
 	{
-		if (pid[idx] != -2)
+		if (pid[idx] != PID_INIT)
 			waitpid(pid[idx], &exit_code, 0);
 		idx++;
 	}

@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:28:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 20:54:26 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 17:04:24 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <errno.h>
 # define MS_BUFFER_SIZE 1024
+# define PID_INIT -2
 
 typedef struct s_cmd
 {

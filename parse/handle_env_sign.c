@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 01:30:56 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 19:56:47 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 17:22:25 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*change_to_env(char *cmd_str, int *idx, int key_idx)
 	following_str = ft_substr(cmd_str, key_idx, ft_strlen(cmd_str));
 	cmd_str[*idx - 1] = '\0';
 	temp = ft_strjoin(cmd_str, env_value);
-	*idx = ft_strlen(temp);
+	*idx = ft_strlen(temp) - 1;
 	new_cmd_str = ft_strjoin(temp, following_str);
 	free(env_key);
 	free(following_str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_signal_heredoc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:47:55 by hwilkim           #+#    #+#             */
-/*   Updated: 2024/12/22 16:45:21 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/22 17:57:13 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ms_struct.h"
 #include "ms_signal.h"
 #include "ms_utils.h"
+#include "ms_execute.h"
 #include "libft.h"
 
 static void			heredoc_signal_handler(int sig);
@@ -48,8 +49,7 @@ static void	heredoc_signal_handler(int sig)
 	list = heredoc_list(NULL);
 	if (sig == SIGINT)
 	{
-		close(node->hd_pipe_fd[0]);
-		close(node->hd_pipe_fd[1]);
+		close_all_fd(list, node);
 		terminal_state(MS_RESTORE_TERMINAL_STATE);
 		handle_hash_leak();
 		ms_terminator(list, 1, 128 + SIGINT);

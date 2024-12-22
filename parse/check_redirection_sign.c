@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:00:51 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 22:11:36 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/22 17:44:16 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static void	delete_redirection(char *cmd, int loc, int sign_size, char *target)
 {
 	int		idx;
-	int		target_idx;
+	int		t_idx;
 
 	idx = 0;
 	while (idx < sign_size)
@@ -30,11 +30,11 @@ static void	delete_redirection(char *cmd, int loc, int sign_size, char *target)
 		cmd[loc + idx] = ' ';
 		idx++;
 	}
-	target_idx = 0;
-	while (target[target_idx] == cmd[loc + idx + target_idx])
+	t_idx = 0;
+	while ((target[t_idx] == cmd[loc + idx + t_idx]) && cmd[loc + idx + t_idx])
 	{
-		cmd[loc + idx + target_idx] = ' ';
-		target_idx++;
+		cmd[loc + idx + t_idx] = ' ';
+		t_idx++;
 	}
 }
 
