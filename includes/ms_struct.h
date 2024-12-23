@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_struct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
+/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:28:08 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 17:04:24 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 18:54:40 by hwilkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MS_STRUCT_H
 
 # include <errno.h>
-# define MS_BUFFER_SIZE 1024
+# define MS_BUFFER_SIZE 4096
 # define PID_INIT -2
 
 typedef struct s_cmd
