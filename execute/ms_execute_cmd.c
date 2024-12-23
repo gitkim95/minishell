@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:13:38 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 16:44:52 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/23 18:35:36 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	execute_cmd(t_cmd *node)
 	envp = get_env_array();
 	if (!node->av[0] || execve(node->av[0], node->av, envp) == -1)
 	{
-		if (node->av[0] && *(node->av[0]))
+		if (node->av[0])
 			perror(node->av[0]);
 		free_split(envp);
 		return (execve_errno_to_exit_code(errno));

@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:58:53 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/20 16:42:03 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 18:30:26 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*parse_cmd_path(char *cmd, char **path)
 
 	if (!cmd)
 		return (cmd);
-	if (*cmd == '/')
+	if (*cmd == '/' || *cmd == '\0')
 		return (cmd);
 	while (*path)
 	{
