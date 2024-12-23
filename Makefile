@@ -35,28 +35,16 @@ UTILS_SRC	=	ms_utils.c	ms_utils_exit.c	ms_mem_free.c
 UTILS_OBJ	=	$(addprefix $(OBJS_DIR)/, $(UTILS_SRC:.c=.o))
 
 EXEC_DIR	=	./execute
-EXEC_SRC	=	ms_execute_logic.c	\
-				ms_close_fd.c	\
-				ms_execute_cmd.c	\
-				ms_processing.c	\
-				ms_init_var.c	\
-				ms_script_loop.c	\
-				ms_set_pipe.c	\
-				ms_handle_heredoc.c
+EXEC_SRC	=	ms_execute_logic.c	ms_close_fd.c	ms_execute_cmd.c	\
+				ms_processing.c		ms_init_var.c	ms_script_loop.c	\
+				ms_set_pipe.c		ms_handle_heredoc.c
 EXEC_OBJ	=	$(addprefix $(OBJS_DIR)/, $(EXEC_SRC:.c=.o))
 
 PARSE_DIR	=	./parse
-PARSE_SRC	=	ms_init_cmd.c	\
-				ms_make_list.c	\
-				ms_parse_path.c	\
-				ms_open_fd.c	\
-				check_redirection_target.c	\
-				check_redirection_sign.c	\
-				handle_env_sign.c	\
-				handle_env_utils.c	\
-				handle_quote_mark.c	\
-				handle_quote_utils.c	\
-				ms_seperate_cmd.c
+PARSE_SRC	=	ms_init_cmd.c	ms_seperate_cmd.c	ms_parse_path.c			\
+				ms_open_fd.c	handle_env_sign.c	handle_env_utils.c		\
+				ms_make_list.c	handle_quote_mark.c	handle_quote_utils.c	\
+				check_redirection_target.c	check_redirection_sign.c
 PARSE_OBJ	=	$(addprefix $(OBJS_DIR)/, $(PARSE_SRC:.c=.o))
 
 SIGNAL_DIR	=	./signal
