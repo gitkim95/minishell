@@ -23,7 +23,7 @@ BUILTIN_SRC =	ms_builtin_cd.c		ms_builtin_echo.c	ms_builtin_env.c	\
 BUILTIN_OBJ	=	$(addprefix $(OBJS_DIR)/, $(BUILTIN_SRC:.c=.o))
 
 ENV_DIR 	=	./env
-ENV_SRC 	=	ms_env.c	ms_env_utils.c
+ENV_SRC 	=	ms_env.c	ms_env_utils.c	ms_env_array.c
 ENV_OBJ 	=	$(addprefix $(OBJS_DIR)/, $(ENV_SRC:.c=.o))
 
 HASH_DIR	=	./hash
