@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:49 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 20:50:46 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/23 17:43:09 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	set_isspace_to_blank(char *cmd)
 			if (cmd[i + 1] == '\"')
 				i++;
 		}
-		else if (ft_isspace(cmd[i]))
+		else if (ft_isblank(cmd[i]))
 			cmd[i] = ' ';
 		i++;
 	}
@@ -62,7 +62,7 @@ int	init_struct(char *str, t_cmd_list *list)
 {
 	char	**temp;
 
-	temp = ft_split(str, '|');
+	temp = seperate_by_pipe(str);
 	if (!temp)
 		exit(ENOMEM);
 	make_list(list, temp);

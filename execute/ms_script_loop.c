@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_script_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:55:02 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 21:51:30 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/23 17:02:33 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	script_loop(t_cmd_list *list)
 			ft_printf("\n");
 			break ;
 		}
-		else if (*input)
+		else if (!ft_isempty(input))
 		{
 			block_signal();
 			add_history(input);

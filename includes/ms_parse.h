@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:05:58 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 20:49:20 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/23 17:37:52 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ int		is_double_output(char *cmd_str);
 int		is_single_output(char *cmd_str);
 
 //handle_env_sign.c
+char	*change_to_env(char *cmd_str, int *idx, int key_idx, int ifs_flag);
 void	handle_env_sign(char **cmd_str);
 void	handle_heredoc_env_sign(char **input);
+
+//handle_env_utils.c
+void	handle_double_quotes_env(char **cmd_str, int *key_idx, int *idx);
+void	get_key_idx(char *cmd_str, int *key_idx, int idx);
+char	*fit_ifs(char *env_value);
 
 //handle_quote_mark.c
 char	**append_cmd_options(char *arg);
@@ -57,5 +63,8 @@ void	set_double_output_fd(char *target, t_cmd *node);
 //ms_parse_path.c
 char	**get_path(char *path);
 char	*parse_cmd_path(char *cmd, char **path);
+
+//ms_seperate_cmd.c
+char	**seperate_by_pipe(char *input);
 
 #endif

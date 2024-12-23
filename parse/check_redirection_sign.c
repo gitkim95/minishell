@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:00:51 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 17:44:16 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:43:10 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	delete_redirection(char *cmd, int loc, int sign_size, char *target)
 		cmd[loc + idx] = ' ';
 		idx++;
 	}
-	while (ft_isspace(cmd[idx + loc]))
+	while (ft_isblank(cmd[idx + loc]))
 	{
 		cmd[loc + idx] = ' ';
 		idx++;
