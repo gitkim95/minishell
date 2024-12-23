@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 01:30:56 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 22:58:27 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:38:45 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,7 @@
 #include "ms_env.h"
 #include "libft.h"
 
-static char	*fit_ifs(char *env_value)
-{
-	char	*ifs_env;
-	char	*ifs_value;
-	int		idx;
-
-	ifs_env = ft_strdup(env_value);
-	if (!ifs_env)
-		return (NULL);
-	ifs_value = ms_get_env(MS_IFS_KEY);
-	idx = 0;
-	while (ifs_env[idx])
-	{
-		if (ft_strchr(ifs_value, ifs_env[idx]))
-			ifs_env[idx] = ' ';
-		idx++;
-	}
-	return (ifs_env);
-}
-
-static char	*change_to_env(char *cmd_str, int *idx, int key_idx, int ifs_flag)
+char	*change_to_env(char *cmd_str, int *idx, int key_idx, int ifs_flag)
 {
 	char	*env_key;
 	char	*env_value;
@@ -71,17 +51,14 @@ void	handle_env_sign(char **cmd_str)
 	while ((*cmd_str)[idx])
 	{
 		if ((*cmd_str)[idx] == '\'')
-		{
-			while ((*cmd_str)[++idx] != '\'' && (*cmd_str)[idx])
-				continue ;
-		}
+			skip_quote(*cmd_str, &idx, '\'');
+		else if ((*cmd_str)[idx] == '\"')
+			handle_double_quotes_env(cmd_str, &key_idx, &idx);
 		else if ((*cmd_str)[idx] == '$')
 		{
 			if (ft_isalnum((*cmd_str)[++idx]) || (*cmd_str)[idx] == '?')
 			{
-				key_idx = idx;
-				while (ft_isalnum((*cmd_str)[key_idx]))
-					key_idx++;
+				get_key_idx(*cmd_str, &key_idx, idx);
 				*cmd_str = change_to_env(*cmd_str, &idx, key_idx, 1);
 			}
 		}

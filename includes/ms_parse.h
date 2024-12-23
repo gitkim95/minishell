@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:05:58 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/23 16:55:39 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:37:52 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ int		is_double_output(char *cmd_str);
 int		is_single_output(char *cmd_str);
 
 //handle_env_sign.c
+char	*change_to_env(char *cmd_str, int *idx, int key_idx, int ifs_flag);
 void	handle_env_sign(char **cmd_str);
 void	handle_heredoc_env_sign(char **input);
+
+//handle_env_utils.c
+void	handle_double_quotes_env(char **cmd_str, int *key_idx, int *idx);
+void	get_key_idx(char *cmd_str, int *key_idx, int idx);
+char	*fit_ifs(char *env_value);
 
 //handle_quote_mark.c
 char	**append_cmd_options(char *arg);
