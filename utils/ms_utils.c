@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/23 17:01:54 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:43:08 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_isempty(char *str)
 	return (1);
 }
 
-int	ft_isspace(char c)
+int	ft_isblank(char c)
 {
 	return (c == ' ' || c == '\v' || c == '\t'\
 		|| c == '\n' || c == '\f' || c == '\r');

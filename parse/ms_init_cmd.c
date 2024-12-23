@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:49 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 23:14:49 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:43:09 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	set_isspace_to_blank(char *cmd)
 			if (cmd[i + 1] == '\"')
 				i++;
 		}
-		else if (ft_isspace(cmd[i]))
+		else if (ft_isblank(cmd[i]))
 			cmd[i] = ' ';
 		i++;
 	}
