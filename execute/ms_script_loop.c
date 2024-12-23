@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:55:02 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 22:26:42 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:02:33 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	run_input(char *input, t_cmd_list *list);
 void	script_loop(t_cmd_list *list)
 {
 	char	*input;
-	
+
 	while (ms_exit(MS_EXIT_GET))
 	{
 		register_signal_handler();

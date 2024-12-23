@@ -54,7 +54,8 @@ PARSE_SRC	=	ms_init_cmd.c	\
 				check_redirection_sign.c	\
 				handle_env_sign.c	\
 				handle_quote_mark.c	\
-				handle_quote_utils.c
+				handle_quote_utils.c	\
+				ms_seperate_cmd.c
 PARSE_OBJ	=	$(addprefix $(OBJS_DIR)/, $(PARSE_SRC:.c=.o))
 
 SIGNAL_DIR	=	./signal

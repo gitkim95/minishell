@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 22:26:07 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:01:54 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strcat(char *dest, const char *src)
 	return (dest);
 }
 
-int ft_isempty(char *str)
+int	ft_isempty(char *str)
 {
 	int	idx;
 

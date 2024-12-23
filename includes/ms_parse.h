@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_parse.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwilkim <hwilkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:05:58 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/22 20:49:20 by hwilkim          ###   ########.fr       */
+/*   Updated: 2024/12/23 16:55:39 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,8 @@ void	set_double_output_fd(char *target, t_cmd *node);
 //ms_parse_path.c
 char	**get_path(char *path);
 char	*parse_cmd_path(char *cmd, char **path);
+
+//ms_seperate_cmd.c
+char	**seperate_by_pipe(char *input);
 
 #endif
