@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:39:35 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/23 17:43:08 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:59:26 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_isempty(char *str)
 	idx = 0;
 	while (str[idx])
 	{
-		if (str[idx] != ' ')
+		if (!ft_isblank(str[idx]))
 			return (0);
 		idx++;
 	}
@@ -47,8 +47,7 @@ int	ft_isempty(char *str)
 
 int	ft_isblank(char c)
 {
-	return (c == ' ' || c == '\v' || c == '\t'\
-		|| c == '\n' || c == '\f' || c == '\r');
+	return (c == ' ' || c == '\t');
 }
 
 int	ft_strcmp(char *s1, char *s2)
