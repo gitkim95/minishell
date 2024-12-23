@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:30:07 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/21 21:05:59 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 18:23:46 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,12 @@ int	is_double_input(char *cmd_str)
 	{
 		if (!ft_strncmp(cmd_str + i, "<<", 2))
 			return (i);
-		i++;
+		if (cmd_str[i] == '\'')
+			skip_quote(cmd_str, &i, '\'');
+		else if (cmd_str[i] == '\"')
+			skip_quote(cmd_str, &i, '\"');
+		else
+			i++;
 	}
 	return (-1);
 }
@@ -64,7 +69,12 @@ int	is_single_input(char *cmd_str)
 	{
 		if (!ft_strncmp(cmd_str + i, "<", 1))
 			return (i);
-		i++;
+		if (cmd_str[i] == '\'')
+			skip_quote(cmd_str, &i, '\'');
+		else if (cmd_str[i] == '\"')
+			skip_quote(cmd_str, &i, '\"');
+		else
+			i++;
 	}
 	return (-1);
 }
@@ -78,7 +88,12 @@ int	is_double_output(char *cmd_str)
 	{
 		if (!ft_strncmp(cmd_str + i, ">>", 2))
 			return (i);
-		i++;
+		if (cmd_str[i] == '\'')
+			skip_quote(cmd_str, &i, '\'');
+		else if (cmd_str[i] == '\"')
+			skip_quote(cmd_str, &i, '\"');
+		else
+			i++;
 	}
 	return (-1);
 }
@@ -92,7 +107,12 @@ int	is_single_output(char *cmd_str)
 	{
 		if (!ft_strncmp(cmd_str + i, ">", 1))
 			return (i);
-		i++;
+		if (cmd_str[i] == '\'')
+			skip_quote(cmd_str, &i, '\'');
+		else if (cmd_str[i] == '\"')
+			skip_quote(cmd_str, &i, '\"');
+		else
+			i++;
 	}
 	return (-1);
 }

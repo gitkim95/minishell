@@ -6,7 +6,7 @@
 /*   By: gitkim <gitkim@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:22:14 by gitkim            #+#    #+#             */
-/*   Updated: 2024/12/23 17:38:11 by gitkim           ###   ########.fr       */
+/*   Updated: 2024/12/23 18:11:51 by gitkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	handle_double_quotes_env(char **cmd_str, int *key_idx, int *idx)
 				*cmd_str = change_to_env(*cmd_str, idx, *key_idx, 0);
 			}
 		}
-		(*idx)++;
+		else
+			(*idx)++;
 	}
 	(*idx)++;
 }
